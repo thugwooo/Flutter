@@ -59,7 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       backgroundColor: Colors.black,
                     ),
                   ),
-                  style: ElevatedButton.styleFrom(minimumSize: Size(200, 100)),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(100, 50),
+                  ),
                 ),
                 SizedBox(
                   width: 100,
@@ -73,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(200, 100),
+                    minimumSize: Size(100, 50),
                   ),
                 ),
               ],
