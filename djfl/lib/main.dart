@@ -1,69 +1,105 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(MyApp());
+Future<List<Photo>> fetchPhotos(http.Client client) async {
+  final response =
+      await client.get(Uri.parse('https://dj-fl.herokuapp.com/app1/3/'));
 
-class Data {
-  int? ids;
-  String? name;
-
-  Data({this.ids, this.name});
-
-  Data.fromMap(Map<String, dynamic> map)
-      : ids = map['Ids'],
-        name = map['name'];
-
-  Data.fromJson(Map<String, dynamic> map)
-      : ids = map['Ids'],
-        name = map['name'];
+  // Use the compute function to run parsePhotos in a separate isolate.
+  return compute(parsePhotos, response.body);
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
+// A function that converts a response body into a List<Photo>.
+List<Photo> parsePhotos(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+
+  return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
+}
+
+class Photo {
+  final int id;
+
+  final String name;
+
+  const Photo({
+    required this.id,
+    required this.name,
+  });
+
+  factory Photo.fromJson(Map<String, dynamic> json) {
+    return Photo(
+      id: json['IDs'] as int,
+      name: json['name'] as String,
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  Widget build(BuildContext context) {
+    const appTitle = 'Isolate Demo';
+
+    return const MaterialApp(
+      title: appTitle,
+      home: MyHomePage(title: appTitle),
+    );
+  }
 }
 
-class _HomeState extends State<Home> {
-  var url = Uri.https('127.0.0.1:8000', '/app1/3');
-  _fetch() async {
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      setState(() {
-        var parsed = json.decode(utf8.decode(response.bodyBytes));
-        print(parsed.map<Data>((json) => Data.fromJson(json)).toList());
-        return parsed.map<Data>((json) => Data.fromJson(json)).toList();
-      });
-    } else {
-      throw Exception('failed to load data');
-    }
-  }
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('제발.....'),
+        title: Text(title),
       ),
-      body: ElevatedButton(
-        onPressed: () {
-          _fetch();
+      body: FutureBuilder<List<Photo>>(
+        future: fetchPhotos(http.Client()),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text('An error has occurred!'),
+            );
+          } else if (snapshot.hasData) {
+            return PhotosList(photos: snapshot.data!);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         },
-        child: Text('버튼'),
       ),
+    );
+  }
+}
+
+class PhotosList extends StatelessWidget {
+  const PhotosList({Key? key, required this.photos}) : super(key: key);
+
+  final List<Photo> photos;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemCount: photos.length,
+      itemBuilder: (context, index) {
+        return Text(photos[index].id.toString() + photos[index].name);
+      },
     );
   }
 }
