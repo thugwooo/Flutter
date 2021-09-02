@@ -26,6 +26,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -47,33 +48,76 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String ID = "";
+    String password = "";
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    getData();
-                  },
-                  child: Text('꺄항'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                  ),
+        child: Form(
+          key: this.formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  icon: Icon(Icons.person),
+                  labelText: 'Name *',
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    sendData({'id': 'asdf', 'name': 'qwer'});
-                  },
-                  child: Text('보내기'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                  ),
+                onSaved: (String? value) {
+                  ID = value!;
+                  print(ID);
+                },
+                validator: (value) {
+                  return value;
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  icon: Icon(Icons.person),
+                  labelText: 'Password *',
                 ),
-              ],
-            ),
-          ],
+                onSaved: (String? value) {
+                  password = value!;
+                  print(password);
+                },
+                validator: (value) {
+                  return value;
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      getData();
+                    },
+                    child: Text('꺄항'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      final form = formKey.currentState;
+                      form!.save();
+                      print(ID + password);
+                      sendData({'name': ID, 'pw': password});
+                    },
+                    child: Text('보내기'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
