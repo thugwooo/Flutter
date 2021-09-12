@@ -18,8 +18,8 @@ class _SurveyState extends State<Survey> {
   List<String> flavorList = [];
   var alg = [
     '닭',
-    ' 돼지',
-    ' 소',
+    '돼지',
+    '소',
     '칠면조',
     '양',
     '오리',
@@ -273,8 +273,15 @@ class _SurveyState extends State<Survey> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  print(sizeList.toString());
-                  sendData({'size': sizeList.toString()});
+                  var data = "{'flavor': $flavorList" +
+                      "'alg': $algList" +
+                      "'health': $healthList}";
+                  print(data);
+                  sendData({
+                    'flavor': flavorList.toString(),
+                    'alg': algList.toString(),
+                    'health': healthList.toString(),
+                  });
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return ShowPetfood(data: sizeList);
                   }));
