@@ -2,28 +2,22 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class ShowPetfood extends StatefulWidget {
-  final data;
-  ShowPetfood({this.data});
   @override
   _ShowPetfoodState createState() => _ShowPetfoodState();
 }
 
 class _ShowPetfoodState extends State<ShowPetfood> {
-  final items = [
-    Image.asset('image/dice1.png', fit: BoxFit.cover),
-    Image.asset('image/dice2.png', fit: BoxFit.cover),
-    Image.asset('image/dice3.png', fit: BoxFit.cover),
-    Image.asset('image/dice4.png', fit: BoxFit.cover),
-    Image.asset('image/dice5.png', fit: BoxFit.cover),
-    Image.asset('image/dice6.png', fit: BoxFit.cover),
-  ];
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          '이거슨!! 사료닷' + widget.data.toString(),
+          '이거슨!! 사료닷',
         ),
         centerTitle: true,
       ),
@@ -32,106 +26,98 @@ class _ShowPetfoodState extends State<ShowPetfood> {
           // 수평적으로 대칭(symmetric)의 마진을 추가 -> 화면 위, 아래에 20픽세의 마진 삽입
           margin: EdgeInsets.all(20.0),
           // 컨테이너의 높이를 200으로 설정
-          height: 200.0,
+          height: 400.0,
           // 리스트뷰 추가
           child: ListView(
-            // 스크롤 방향 설정. 수평적으로 스크롤되도록 설정
             scrollDirection: Axis.horizontal,
-            // 컨테이너들을 ListView의 자식들로 추가
-            children: <Widget>[
+            children: [
               Container(
-                width: 160.0,
-                color: Colors.red,
+                width: 200,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(petfood[0]['name'].toString()),
+                    Text(petfood[0]['brand'].toString()),
+                    Text(petfood[0]['flavor'].toString()),
+                    Text(petfood[0]['main_eff'].toString()),
                   ],
                 ),
               ),
               Container(
-                width: 160.0,
-                color: Colors.orange,
+                width: 200,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(petfood[1]['name'].toString()),
+                    Text(petfood[1]['brand'].toString()),
+                    Text(petfood[1]['flavor'].toString()),
+                    Text(petfood[1]['main_eff'].toString()),
                   ],
                 ),
               ),
               Container(
-                width: 160.0,
-                color: Colors.yellow,
+                width: 200,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(petfood[2]['name'].toString()),
+                    Text(petfood[2]['brand'].toString()),
+                    Text(petfood[2]['flavor'].toString()),
+                    Text(petfood[2]['main_eff'].toString()),
                   ],
                 ),
               ),
               Container(
-                width: 160.0,
-                color: Colors.green,
+                width: 200,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(petfood[3]['name'].toString()),
+                    Text(petfood[3]['brand'].toString()),
+                    Text(petfood[3]['flavor'].toString()),
+                    Text(petfood[3]['main_eff'].toString()),
                   ],
                 ),
               ),
               Container(
-                width: 160.0,
-                color: Colors.blue,
+                width: 200,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(petfood[4]['name'].toString()),
+                    Text(petfood[4]['brand'].toString()),
+                    Text(petfood[4]['flavor'].toString()),
+                    Text(petfood[4]['main_eff'].toString()),
                   ],
                 ),
               ),
               Container(
-                width: 160.0,
-                color: Colors.indigo,
+                width: 200,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
-                  ],
-                ),
-              ),
-              Container(
-                width: 160.0,
-                color: Colors.purple,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
-                  ],
-                ),
-              ),
-              Container(
-                width: 160.0,
-                color: Colors.amber,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text('사진'),
-                    Text('브랜드'),
-                    Text('간단한설명'),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(petfood[5]['name'].toString()),
+                    Text(petfood[5]['brand'].toString()),
+                    Text(petfood[5]['flavor'].toString()),
+                    Text(petfood[5]['main_eff'].toString()),
                   ],
                 ),
               ),
@@ -142,3 +128,305 @@ class _ShowPetfoodState extends State<ShowPetfood> {
     );
   }
 }
+
+var petfood = [
+  {
+    "pet": "강아지",
+    "brand": "네이쳐스프로텍션",
+    "name": "화이트 도그 스타터",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P( 임신 및 수유기)",
+    "flavor": ["연어"],
+    "alg": ["연어", "콩"],
+    "health": ["눈물"],
+    "main_eff":
+        "눈물 개선 목적으로 만들어진 사료n 사료 급여 후 눈물 개선 효과가 있다는 사례가 존재하며n 장 건강과 영양흡수를 돕는 마이크로지오젠 이 사료속에 포함되어 있다n 오메가3 오메가6 함량이 표기되어 있지 않다. EPA + DHA 수치를 고려하여 추가적인 영양제 급여가 필요하다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "오리젠",
+    "name": "퍼피",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P",
+    "flavor": ["닭", "칠면조", "청어", "가자미"],
+    "alg": ["닭", "칠면조", "어류", "과일"],
+    "health": ["관절"],
+    "main_eff":
+        "1.1cm의 키블 크기로 급하게 먹는 아이들이 먹기에 적합하다. n EPA + DHA 함유량이 0.5% 가 넘어 신체 면연력 및 피부 컨디션, 혈류개선에 도움을준다.n 렌틸콩 과 완두 같은 글루텐이 없는 탄수화물 사용, 원료가 우수하며 사료흡수율 또한 좋다. 관절 건강에 좋은 강황이 포함되어 있다.n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절 건강, 슬개골 탈구 예방과 수술 이후 회복에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "오리젠",
+    "name": "퍼피 라지 브리드",
+    "food_type": "건식",
+    "size": "대형",
+    "age": "P",
+    "flavor": ["닭", "칠면조", "청어", "가자미"],
+    "alg": ["닭", "칠면조", "어류", "과일"],
+    "health": ["관절"],
+    "main_eff":
+        "1.1cm의 키블 크기로 급하게 먹는 아이들이 먹기에 적합하다. n EPA + DHA 함유량이 0.5% 가 넘어 신체 면연력 및 피부 컨디션, 혈류개선에 도움을준다.n 렌틸콩 과 완두 같은 글루텐이 없는 탄수화물 사용, 원료가 우수하며 사료흡수율 또한 좋다. 관절 건강에 좋은 강황이 포함되어 있다.n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절 건강, 슬개골 탈구 예방, 수술 이후 회복에 도움을 줄 수도 있다.n 대형견종 전용으로 나온 사료로, 대형견의 성장 속도를 고려하여 지방 비율이 상대적으로 낮다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "비고앤세이지",
+    "name": "울프베리 웰빙 레귤러 퍼피독",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P",
+    "flavor": ["칠면조"],
+    "alg": ["칠면조", "아마", "효모", "과일"],
+    "health": ["소화"],
+    "main_eff":
+        "위벽 보호, 위염과 위궤양 예방에 좋은 참마가 포함되어 있다.n 소화 운동에 도움을 주며 피부개선에 효능이 있는 귤껍질이 포함되어 있다.n 오메가3 오메가6 함량이 표기되어 있지 않다. EPA + DHA 수치를 고려하여 추가적인 영양제 급여가 필요하다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "벨포아",
+    "name": "주니어",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P",
+    "flavor": ["동에등애"],
+    "alg": ["과일", "효모"],
+    "health": ["알레르기", "소화", "체중조절"],
+    "main_eff":
+        "단일단백질(Novel protein)n 이눌린 (프리바이오틱스) 가 함유되어 있어 소화기 건강에 좋다.n 지방과 탄수화물 수치가 낮고 칼로리가 낮아 체중 조절에 효과적이다.n EPA + DHA 함유량이 0.2%로 낮아 추가적인 오메가3 급여가 필요하다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "네이쳐스프로텍션",
+    "name": "화이트 도그",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["쌀", "보리", "콩", "닭", "양"],
+    "alg": ["닭", "양", "곡류", "과일"],
+    "health": ["눈물"],
+    "main_eff":
+        "눈물 개선 목적으로 만들어진 사료n 사료 급여 후 눈물 개선 효과가 있다는 사례가 존재하며n 장 건강과 영양흡수를 돕는 마이크로지오젠 이 사료속에 포함되어 있다.n 프로바이오틱스 함유량이 높은 치커리 추출물이 포함되어 있어 체내 영양소 흡수 및 배변 활동에 도움을 준다.n 오메가3 오메가6 함량이 표기되어 있지 않다. EPA + DHA 수치를 고려하여 추가적인 영양제 급여가 필요하다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "네이쳐스프로텍션",
+    "name": "화이트 피쉬",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["어분(흰살생선)"],
+    "alg": ["어류", "콩", "아마"],
+    "health": ["눈물", "소화"],
+    "main_eff":
+        "눈물 개선 목적으로 만들어진 사료n 사료 급여 후 눈물 개선 효과가 있다는 사례가 존재하며n 장 건강과 영양흡수를 돕는 마이크로지오젠 이 사료속에 포함되어 있다.n 프로바이오틱스 함유량이 높은 치커리 추출물이 포함되어 있어 체내 영양소 흡수 및 배변 활동에 도움을 준다.n 프락토올리고당이 포함되어 있어 설사개선에 도움을 준다.n 크릴이 포함되어 있어 양질의 오메가3를 얻을 수 있다.n 오메가3 오메가6 함량이 표기되어 있지 않다. EPA + DHA 수치를 고려하여 추가적인 영양제 급여가 필요하다.n 어분의 추가적인 성분 확인이 필요하다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "네이쳐스프로텍션",
+    "name": "화이트 도그 주니어",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P",
+    "flavor": ["흰살생선"],
+    "alg": ["어류", "콩", "아마"],
+    "health": ["눈물", "소화"],
+    "main_eff":
+        "눈물 개선 목적으로 만들어진 사료n 사료 급여 후 눈물 개선 효과가 있다는 사례가 존재하며n 장 건강과 영양흡수를 돕는 마이크로지오젠 이 사료속에 포함되어 있다.n 프로바이오틱스 함유량이 높은 치커리 추출물이 포함되어 있어 체내 영양소 흡수 및 배변 활동에 도움을 준다.n 프락토올리고당이 포함되어 있어 설사개선에 도움을 준다.n 크릴이 포함되어 있어 양질의 오메가3를 얻을 수 있다.n 오메가3 오메가6 함량이 표기되어 있지 않다. EPA + DHA 수치를 고려하여 추가적인 영양제 급여가 필요하다.n 어분의 추가적인 성분 확인이 필요하다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "비고앤세이지",
+    "name": "릴리르트 뷰티 스몰 브리드 어덜트독",
+    "food_type": "건식",
+    "size": "소형",
+    "age": "A",
+    "flavor": ["연어"],
+    "alg": ["연어", "콩", "아마", "과일"],
+    "health": ["눈물", "관절", "치아"],
+    "main_eff":
+        "녹차 폴리페놀이 함유되어 있어 치석 제거에 탁월하다. n 당귀, 율무, 백합뿌리와 같은 원료들은 피부와 모질에 도움을 준다.n 글루코사민과 콘드로인이 적정량 포함되어 있다. 이는 관절 건강, 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "오리젠",
+    "name": "6fish",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["정어리", "고등어", "메를루사", "가자미", "볼락", "솔피쉬"],
+    "alg": ["어류", "콩", "과일"],
+    "health": ["관절", "피부", "소화"],
+    "main_eff":
+        "EPA + DHA 함유량이 1.2% 이상으로 신체 면역력 및 피부 컨디션에 도움을 준다n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절 건강, 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다.n 관절 건강에 좋은 강황이 포함되어 있다.n 엔테로코커스 유산균이 함유되어 있어 장 건강에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "오리젠",
+    "name": "오리지날 독",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["닭", "칠면조", "계란", "청어", "가자미"],
+    "alg": ["닭", "칠면조", "계란", "어류", "콩", "과일"],
+    "health": ["관절", "피부", "소화"],
+    "main_eff":
+        "고단백 사료(단백질 함량이 굉장히 높다.)이며 어류에서 나온 EPA +DHA 가 포함되어 있다. n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다.n 관절 건강에 좋은 강황이 포함되어 있다.n 엔트로코커스 유산균이 함유되어 있어 장 건강에 도움을 준다.n 키블 크기가 1.1cm 로 사료를 급하게 먹거나 자주 체하는 아이들에게 급여해주면 좋다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "오리젠",
+    "name": "오리지날 독 스몰 브리드",
+    "food_type": "건식",
+    "size": "소형",
+    "age": "A",
+    "flavor": ["칠면조", "닭", "메추리", "계란", "볼락", "청어"],
+    "alg": ["닭", "칠면조", "계란", "어류", "콩", "과일"],
+    "health": ["관절", "소화"],
+    "main_eff":
+        "고단백 사료(단백질 함량이 굉장히 높다.)이며 어류에서 나온 EPA +DHA 가 포함되어 있다. n DHA +EPA 수치가 0.4% 로 추가적인 급여를 해도 좋다. n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다.n 관절 건강에 좋은 강황이 포함되어 있다.n 엔트로코커스 유산균이 함유되어 있어 장 건강에 도움을 준다.n 키블 크기가 1.1cm 로 사료를 급하게 먹거나 자주 체하는 아이들에게 급여해주면 좋다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "아카나",
+    "name": "패시피카 독",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["청어", "정어리", "첨치가자미", "대구", "명태"],
+    "alg": ["어류", "콩", "과일"],
+    "health": ["피부", "소화"],
+    "main_eff":
+        "엔테로코커스 유산균이 함유 되어 있어 장 건강에 도움을 준다.n EPA + DHA 함유량이 1.6% 이상으로 높아 신체 면역력 및 피부 컨디션, 혈류개선에 도움을 준다n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다.n 엔테로코커스 유산균이 함유되어 있어 장 건강에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "아카나",
+    "name": "어덜트 스몰브리드",
+    "food_type": "건식",
+    "size": "소형",
+    "age": "A",
+    "flavor": ["닭", "칠면조"],
+    "alg": ["닭", "칠면조", "콩", "어류", "과일"],
+    "health": ["관절", "소화"],
+    "main_eff":
+        "엔테로코커스 유산균이 함유 되어 있어 장 건강에 도움을 준다. n 키블 크기가 작아(0.7cm) 키블이 커서 급여가 어려웠던 아이에게 좋다.n 관절 건강에 도움을 주는 강황 뿌리 (서큐민) 이 함유되어 있다.n 글루코사민과 콘드로이틴 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "아카나",
+    "name": "와일드 프레이리 독",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["닭", "칠면조", "청어", "월아이"],
+    "alg": ["닭", "칠면조", "어류", "콩", "과일"],
+    "health": ["관절", "소화"],
+    "main_eff":
+        "엔테로코커스 유산균이 함유 되어 있어 장 건강에 도움을 준다. n 관절 건강에 도움을 주는 강황 뿌리 (서큐민) 이 함유되어 있다.n 글루코사민과 콘드로이틴 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "아카나",
+    "name": "프리런 덕",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["오리"],
+    "alg": ["오리", "콩", "과일"],
+    "health": ["알레르기", "관절"],
+    "main_eff":
+        "단일단백질n 관절 건강에 도움을 주는 강황 (서큐민) 이 함유되어 있다.n 해조류에서 얻어지는 EPA + DHA 가 0.25% 함유되어 있다.n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다.n 엔테로코커스 유산균이 함유 되어 있어 장 건강에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "아카나",
+    "name": "요크셔 포크",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "A",
+    "flavor": ["돼지"],
+    "alg": ["돼지", "콩", "과일"],
+    "health": ["알레르기", "관절"],
+    "main_eff":
+        "단일단백질n 관절 건강에 도움을 주는 강황(서큐민)이 함유되어 있다.n 해조류에서 얻어지는 EPA + DHA 가 0.25% 함유되어 있다.n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다.n 엔테로코커스 유산균이 함유 되 어 있어 장 건강에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "파미나",
+    "name": "N&D 닭고기&석류 미니",
+    "food_type": "건식",
+    "size": "소형(확인필요)",
+    "age": "A",
+    "flavor": ["닭"],
+    "alg": ["닭", "콩", "어류", "과일", "효모"],
+    "health": ["소화"],
+    "main_eff":
+        "치커리 추출물 과 프락토 올리고당 내에는 프로바이오틱스 함유량이 높아 체내 영양소 흡수 및 배변활동에 도움을 준다.n EPA + DHA 함유량이 0.8%로 신체 면역력 및 피부 컨디션, 혈류개선에 도움을 준다.n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "파미나",
+    "name": "N&D 멧돼지&사과 미니",
+    "food_type": "건식",
+    "size": "소형(확인필요)",
+    "age": "A",
+    "flavor": ["멧돼지"],
+    "alg": ["콩", "계란", "과일", "효모"],
+    "health": ["알레르기"],
+    "main_eff":
+        "단일단백질(Novel Protein)n 치커리 추출물 과 프락토 올리고당 내에는 프로바이오틱스 함유량이 높아 체내 영양소 흡수 및 배변활동 에 도움을 준다.n 관절 건강에 도움을 주는 강황(서큐민)이 함유되어 있다.n EPA + DHA 함유량이 0.8%로 신체 면역력 및 피부 컨디션, 혈류개선에 도움을 준다.n 글루코사민과 콘드로이틴이 적정량 포함되어 있다. 이는 관절건강과 슬개골 탈구 예방, 수술 이후 회복에 도움을 준다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "파미나",
+    "name": "N&D 대구&오렌지 미니",
+    "food_type": "건식",
+    "size": "소형(확인필요)",
+    "age": "A",
+    "flavor": ["대구"],
+    "alg": ["어류", "콩", "과일", "효모"],
+    "health": ["피부", "관절"],
+    "main_eff":
+        "단일단백질n 치커리추출물 & 프락토 올리고당(FOS) 이눌린과 올리고당 속에는 프로바이오틱스 함유량이 높다. 따라서 체내 영양소 흡수 및 배변 활동에 도움을 준다.n 관절 건강에 도움이 되는 초록입홍합이 함유되어 있다.n EPA + DHA 1.7% 가 넘어 신체 면역력 및 피부 컨디션에 좋으며 별도의 오메가 3를 보충하지 않아도 된다.n 관절 건강에 도움을 주는 강황(서큐민) 이 함유되어 있다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "지위픽",
+    "name": "독 사슴고기",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P, A",
+    "flavor": ["사슴"],
+    "alg": ["-1"],
+    "health": ["알레르기", "관절"],
+    "main_eff":
+        "단일단백질n 고단백 고지방 사료n 뉴질랜드 초록홍합(글루코사민 + 콘드로이틴)이 함유되어 있어 관절건강에 도움을 준다.n 갑상선 건강에 좋은 켈프가 포함되어 있다.n 킬레이트 처리가 된 미네랄이 함유되어 체내 흡수율이 높다.n EPA + DHA 함유량이 0.17%로 적어 추가적인 오메가3 급여가 추천된다.n 사료내 유산균이 확인되지 않아 추가적인 유산균 급여가 추천된다.n 칼로리가 높아 활동성이 떨어지는 노령견은 주의해야한다.n 고지방 제품이라 췌장이 좋지 않은 아이는 주의해야한다.n 제2인산칼슘이 함유되어 있다. 인과 칼슘의 비율 조정에 쓰이지만 과량 급여에 주의해야 한다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "지위픽",
+    "name": "독 양고기",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P, A",
+    "flavor": ["양"],
+    "alg": ["-1"],
+    "health": ["알레르기", "관절"],
+    "main_eff":
+        "단일단백질n 고단백 고지방 사료n 뉴질랜드 초록홍합(글루코사민 + 콘드로이틴)이 함유되어 있어 관절건강에 도움을 준다.n 갑상선 건강에 좋은 켈프가 포함되어 있다.n 킬레이트 처리가 된 미네랄이 함유되어 체내 흡수율이 높다.n EPA + DHA 함유량이 0.18%로 적어 추가적인 오메가3 급여가 추천된다.n 사료내 유산균이 확인되지 않아 추가적인 유산균 급여가 추천된다.n 칼로리가 높아 활동성이 떨어지는 노령견은 주의해야한다.n 고지방 제품이라 췌장이 좋지 않은 아이는 주의해야한다.n 제2인산칼슘이 함유되어 있다. 인과 칼슘의 비율 조정에 쓰이지만 과량 급여에 주의해야 한다."
+  },
+  {
+    "pet": "강아지",
+    "brand": "지위픽",
+    "name": "독 닭",
+    "food_type": "건식",
+    "size": "무관",
+    "age": "P,A",
+    "flavor": ["닭"],
+    "alg": ["닭"],
+    "health": ["관절"],
+    "main_eff":
+        "단일단백질n 고단백 고지방 사료n 뉴질랜드 초록홍합(글루코사민 + 콘드로이틴)이 함유되어 있어 관절건강에 도움을 준다.n 갑상선 건강에 좋은 켈프가 포함되어 있다.n 킬레이트 처리가 된 미네랄이 함유되어 체내 흡수율이 높다.n EPA + DHA 함유량이 0.14%로 적어 추가적인 오메가 3 급여가 추천된다.n 사료내 유산균이 확인되지 않아 추가적인 유산균 급여가 추천된다."
+  }
+];

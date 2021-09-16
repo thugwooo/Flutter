@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:test2/data/model.dart';
 
 class Network {
   final String url;
@@ -15,18 +14,21 @@ class Network {
     }
   }
 
-  Future<void> postJsonData(dynamic data) async {
+  Future<dynamic> postJsonData(dynamic data) async {
+    var list;
     try {
       var url2 = Uri.parse(url);
       var response = await post(url2, body: data);
 
       print('post status: ${response.statusCode}');
+
       var responseBody = utf8.decode(response.bodyBytes);
-      print(responseBody);
-      List<dynamic> list = jsonDecode(responseBody);
+      print("body: $responseBody");
+      list = jsonDecode(responseBody);
       print(list.length);
     } catch (e) {
       print(e);
     }
+    return list;
   }
 }

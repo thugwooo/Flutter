@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test2/showFood.dart';
 
 import 'data/network.dart';
+import 'data/jsondata.dart';
 
 class Survey extends StatefulWidget {
   const Survey({Key? key}) : super(key: key);
@@ -42,12 +43,27 @@ class _SurveyState extends State<Survey> {
   List<String> sizeList = [];
   var health = ['눈물', '피부(피모)', '관절', '소화', '기호성', '알레르기'];
   List<String> healthList = [];
-
-  void sendData(dynamic sendData) async {
+  /*
+  Future<List> sendData(dynamic sendData) async {
+    var data;
     Network network = Network('https://dj-fl.herokuapp.com/app1/findFeed');
-    await network.postJsonData(sendData);
-  }
+    try {
+      data = await network.postJsonData(sendData);
+    } catch (e) {}
 
+    return data;
+  }
+ */
+/*
+  dynamic sendData(Map<String, dynamic> key) {
+    List filteredData;
+
+    filteredData = petfoodData().filteringAlg(petfood, key['alg']);
+    filteredData = petfoodData().filteringFlavor(filteredData, key['flavor']);
+    filteredData = petfoodData().filteringHealth(filteredData, key['health']);
+    return filteredData;
+  }
+*/
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -273,17 +289,14 @@ class _SurveyState extends State<Survey> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  var data = "{'flavor': $flavorList" +
-                      "'alg': $algList" +
-                      "'health': $healthList}";
-                  print(data);
-                  sendData({
-                    'flavor': flavorList.toString(),
-                    'alg': algList.toString(),
-                    'health': healthList.toString(),
-                  });
+                  /*var data = sendData({
+                    'flavor': flavorList,
+                    'alg': algList,
+                    'health': healthList,
+                  });*/
+                  //print(data);
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ShowPetfood(data: sizeList);
+                    return ShowPetfood();
                   }));
                 },
                 child: Text('완료'),
