@@ -10,6 +10,18 @@ class LoginSignupScreen extends StatefulWidget {
 
 class _LoginSignupScreenState extends State<LoginSignupScreen> {
   bool isSignupScreen = true;
+  final _formKey = GlobalKey<FormState>();
+  String userName = '';
+  String userEmail = '';
+  String userPassword = '';
+
+  void _tryValidatation() {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      _formKey.currentState!.save();
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.backgroundColor,
@@ -158,9 +170,20 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                     Container(
                       margin: EdgeInsets.only(top: 20),
                       child: Form(
+                        key: _formKey,
                         child: Column(
                           children: [
                             TextFormField(
+                              key: ValueKey(1),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 4) {
+                                  return 'Please enter at least 4 characters';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                userName = value!;
+                              },
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.account_circle,
@@ -194,6 +217,16 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               height: 8,
                             ),
                             TextFormField(
+                              key: ValueKey(2),
+                              onSaved: (value) {
+                                userEmail = value!;
+                              },
+                              validator: (value) {
+                                if (value!.isEmpty || value.contains('@')) {
+                                  return 'Please enter a valid email address.';
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.email,
@@ -227,6 +260,16 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               height: 8,
                             ),
                             TextFormField(
+                              key: ValueKey(3),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 6) {
+                                  return 'Password must be at least 7 characters long';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                userPassword = value!;
+                              },
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.lock,
@@ -267,6 +310,13 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                         child: Column(
                           children: [
                             TextFormField(
+                              key: ValueKey(4),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 6) {
+                                  return 'Password must be at least 7 characters long';
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.account_circle,
@@ -300,6 +350,13 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               height: 8,
                             ),
                             TextFormField(
+                              key: ValueKey(5),
+                              validator: (value) {
+                                if (value!.isEmpty || value.length < 6) {
+                                  return 'Password must be at least 7 characters long';
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.account_circle,
