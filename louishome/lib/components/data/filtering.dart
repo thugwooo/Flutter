@@ -1,5 +1,3 @@
-import 'petfood.dart';
-
 dynamic filteringGeneral(var filteringData, var key) {
   var fileredGeneral = [];
   for (var i = 0; i < filteringData.length; i++) {
@@ -16,7 +14,21 @@ dynamic filteringAge(var filteringData, var key) {
 
   for (var i = 0; i < filteringData.length; i++) {
     if (filteringData[i]['age'].contains('무관') ||
+        filteringData[i]['age'] == [''] ||
         filteringData[i]['age'].contains(key)) {
+      filteredData.add(filteringData[i]);
+    }
+  }
+  return filteredData;
+}
+
+dynamic filteringSize(var filteringData, var key) {
+  var filteredData = [];
+
+  for (var i = 0; i < filteringData.length; i++) {
+    if (filteringData[i]['size'].contains('무관') ||
+        filteringData[i]['size'] == [''] ||
+        filteringData[i]['size'].contains(key)) {
       filteredData.add(filteringData[i]);
     }
   }
@@ -81,21 +93,20 @@ dynamic filteringHealth(var filteringData, var key) {
   var filteredData = [];
   if (key.length < 1) {
     filteredData = filteringData;
-  }
-
-  for (var i = 0; i < filteringData.length; i++) {
-    var flag = false;
-    for (var j = 0; j < key.length; j++) {
-      if (filteringData[i]['health'].contains(key[j])) {
-        flag = true;
+  } else {
+    for (var i = 0; i < filteringData.length; i++) {
+      for (var j = 0; j < key.length; j++) {
+        if (filteringData[i]['health'].contains(key[j] + '(S)')) {
+          filteredData.add(filteringData[i]);
+        }
       }
     }
-    if (key.contains('뼈/관절') &&
-        filteringData[i]['health'].contains('뼈/관절(S)')) {
-      flag = true;
-    }
-    if (flag) {
-      filteredData.add(filteringData[i]);
+    for (var i = 0; i < filteringData.length; i++) {
+      for (var j = 0; j < key.length; j++) {
+        if (filteringData[i]['health'].contains(key[j])) {
+          filteredData.add(filteringData[i]);
+        }
+      }
     }
   }
   return filteredData;

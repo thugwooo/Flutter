@@ -1,25 +1,29 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:louishome/components/screens/dog_screen.dart';
-import 'package:louishome/components/screens/dogsc.dart';
+import 'package:louishome/components/screens/main_screen.dart';
+import 'package:louishome/components/screens/register_screen.dart';
 
-class MainScreen extends StatelessWidget {
+import 'login_screen.dart';
+
+class CheckScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('고르시오.'),
+        title: Text('Louis home'),
+        leading: Image.asset(
+          'images/png/LOGO-WHITE.png',
+          height: 100,
+        ),
         centerTitle: true,
         backgroundColor: Color.fromRGBO(0, 36, 79, 1),
       ),
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          
           children: [
             InkWell(
               child: Container(
-                margin: EdgeInsets.only(left:40),
+                margin: EdgeInsets.only(left: 40),
                 height: 200,
                 width: 350,
                 decoration: BoxDecoration(
@@ -30,18 +34,21 @@ class MainScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
-                  child: Text('강아지',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                  child: Text(
+                    '신규회원',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return DogScreen2();
+                  return RegisterScreen();
                 }));
               },
             ),
             InkWell(
               child: Container(
-                margin: EdgeInsets.only(right:40),
+                margin: EdgeInsets.only(right: 40),
                 height: 200,
                 width: 350,
                 decoration: BoxDecoration(
@@ -52,12 +59,18 @@ class MainScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Center(
-                  child: Text('고양이',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,),),
+                  child: Text(
+                    '기존회원',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return DogScreen();
+                  return LoginScreen();
                 }));
               },
             ),
