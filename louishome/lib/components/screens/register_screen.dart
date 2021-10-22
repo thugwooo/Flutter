@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:louishome/components/screens/dog_screen.dart';
+
+import 'cat_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -7,12 +10,25 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  var phoneNumber;
-  var name;
   var pet = ["강아지", "고양이"];
   var petType = "";
   var colors = [Color.fromRGBO(0, 36, 79, 1), Colors.grey];
   var selectedPetId = 0;
+  var userData = {
+    "name": "",
+    "phoneNumber": "",
+    "pet": "",
+    "breed": "",
+    "birthYear": "2021",
+    "birthMonth": "1",
+    "birthDay": "1",
+    "sex": 0,
+    "neu": 0,
+    "weight": 0,
+    "bcs": 0,
+    "alg": "",
+    "health": "",
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           border: OutlineInputBorder(),
                         ),
                         onSaved: (value) {
-                          name = value;
+                          userData['name'] = value!;
                         },
                       ),
                     ),
@@ -89,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         keyboardType: TextInputType.phone,
                         onSaved: (value) {
-                          phoneNumber = value;
+                          userData["phoneNumber"] = value!;
                         },
                       ),
                     ),
@@ -138,7 +154,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onPressed: () {
                   _formKey.currentState!.save();
                   if (petType == "강아지") {
-                  } else if (petType == "고양이") {}
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return DogScreen();
+                    }));
+                  } else if (petType == "고양이") {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return CatScreen(
+                        userData: userData,
+                      );
+                    }));
+                  }
                 },
               ),
             ],

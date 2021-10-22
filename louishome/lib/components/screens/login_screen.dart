@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:louishome/components/screens/cat_screen.dart';
 import 'package:louishome/components/screens/dog_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   var phoneNumber;
   var name;
-  var userData = [];
+  var userData;
   Future<dynamic> getUserData(url) async {
     var url2 = Uri.parse(url);
 
@@ -24,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
       for (var i = 0; i < pasingData.length; i++) {
         if (name == pasingData[i]['name'] &&
             phoneNumber == pasingData[i]['phoneNumber']) {
-          userData.add(pasingData[i]);
+          userData = pasingData[i];
         }
       }
       return userData;
@@ -122,10 +123,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   _formKey.currentState!.save();
                   getUserData('http://10.0.2.2:8000/server/getuserData/');
 
-                  if (userData[0]['pet'] == '강아지') {
+                  if (userData['pet'] == '강아지') {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return DogScreen(
+                        userData: userData,
+                      );
+                    }));
+                  } else if (userData['pet'] == '고양이') {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return CatScreen(
                         userData: userData,
                       );
                     }));

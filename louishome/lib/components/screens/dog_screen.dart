@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:http/http.dart';
+
 import 'package:louishome/components/data/breed.dart';
 import 'package:louishome/components/screens/showPetfood_screen.dart';
 
 class DogScreen extends StatefulWidget {
   var userData;
+
   DogScreen({this.userData});
   @override
   _DogScreenState createState() => _DogScreenState();
@@ -62,6 +63,7 @@ class _DogScreenState extends State<DogScreen> {
   @override
   initState() {
     super.initState();
+    print(widget.userData);
     for (var i = 0; i < 33; i++) {
       year.add((i + 1990).toString());
       if (i < 31) {
@@ -73,21 +75,21 @@ class _DogScreenState extends State<DogScreen> {
     }
 
     if (widget.userData.length > 0) {
-      selectedYearValue = widget.userData[0]['birthYear'];
-      selectedMonthValue = widget.userData[0]['birthMonth'];
-      selectedDayValue = widget.userData[0]['birthDay'];
-      selectedBCSId = int.parse(widget.userData[0]['bcs']);
-      selectedSexId = int.parse(widget.userData[0]['sex']);
-      selectedNeuteringId = int.parse(widget.userData[0]['neu']);
+      selectedYearValue = widget.userData['birthYear'];
+      selectedMonthValue = widget.userData['birthMonth'];
+      selectedDayValue = widget.userData['birthDay'];
+      selectedBCSId = int.parse(widget.userData['bcs']);
+      selectedSexId = int.parse(widget.userData['sex']);
+      selectedNeuteringId = int.parse(widget.userData['neu']);
 
-      algList.add(widget.userData[0]['alg']);
+      algList.add(widget.userData['alg']);
       if (algList.length > 0) {
         algBool = true;
         selectedAlgId = 0;
       }
-      healthList.add(widget.userData[0]['health']);
-      weight = widget.userData[0]['weight'];
-      name = widget.userData[0]['name'];
+      healthList.add(widget.userData['health']);
+      weight = widget.userData['weight'];
+      name = widget.userData['name'];
     }
   }
 
@@ -206,6 +208,7 @@ class _DogScreenState extends State<DogScreen> {
                         onChanged: (value) {
                           setState(() {
                             selectedYearValue = value.toString();
+                            widget.userData['birthYear'] = selectedYearValue;
                           });
                         },
                       ),
@@ -238,6 +241,7 @@ class _DogScreenState extends State<DogScreen> {
                         onChanged: (value) {
                           setState(() {
                             selectedMonthValue = value.toString();
+                            widget.userData['birthMonth'] = selectedMonthValue;
                           });
                         },
                       ),
@@ -270,6 +274,7 @@ class _DogScreenState extends State<DogScreen> {
                         onChanged: (value) {
                           setState(() {
                             selectedDayValue = value.toString();
+                            widget.userData['birthDay'] = selectedDayValue;
                           });
                         },
                       ),
@@ -332,6 +337,7 @@ class _DogScreenState extends State<DogScreen> {
                           onTap: () {
                             setState(() {
                               selectedSexId = index;
+                              widget.userData['sex'] = selectedSexId;
                               print(sex[index]);
                             });
                           },
@@ -375,6 +381,7 @@ class _DogScreenState extends State<DogScreen> {
                           onTap: () {
                             setState(() {
                               selectedNeuteringId = index;
+                              widget.userData['neu'] = selectedNeuteringId;
                               print(neutering[index]);
                             });
                           },
@@ -476,6 +483,7 @@ class _DogScreenState extends State<DogScreen> {
                                 onTap: () {
                                   setState(() {
                                     selectedBCSId = index;
+                                    widget.userData['bcs'] = selectedBCSId;
                                   });
                                 },
                               ),
@@ -542,6 +550,7 @@ class _DogScreenState extends State<DogScreen> {
                                 if (index == 0) {
                                   algBool = true;
                                 }
+
                                 print(algAnswer[index]);
                               });
                             },
@@ -588,6 +597,7 @@ class _DogScreenState extends State<DogScreen> {
                             algList.contains(alg[index])
                                 ? algList.remove(alg[index])
                                 : algList.add(alg[index]);
+                            widget.userData['alg'] = algList[0].toString();
                           },
                         );
                       },
@@ -665,6 +675,7 @@ class _DogScreenState extends State<DogScreen> {
                         healthList.contains(health[index])
                             ? healthList.remove(health[index])
                             : healthList.add(health[index]);
+                        widget.userData['health'] = healthList[0].toString();
                       });
                     },
                   ),

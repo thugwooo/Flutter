@@ -13,6 +13,7 @@ class ShowPetfoodScreen extends StatefulWidget {
   var year;
   var month;
   var day;
+  var userData;
   ShowPetfoodScreen({
     this.pet,
     this.age,
@@ -23,6 +24,7 @@ class ShowPetfoodScreen extends StatefulWidget {
     this.year,
     this.month,
     this.day,
+    this.userData,
   });
 
   @override
@@ -41,15 +43,17 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   @override
   void initState() {
     super.initState();
-    birth = DateTime.utc(int.parse(widget.year), int.parse(widget.month),
-            int.parse(widget.day))
+    birth = DateTime.utc(
+            int.parse(widget.userData['birthYear']),
+            int.parse(widget.userData['birthMonth']),
+            int.parse(widget.userData['birthDay']))
         .toString();
     birthDate =
         int.parse(today.difference(DateTime.parse(birth)).inDays.toString());
     birthMonth = birthDate ~/ 30;
-    if (widget.pet == '강아지') {
+    if (widget.userData['pet'] == '강아지') {
       dogfiltering();
-    } else if (widget.pet == '고양이') {
+    } else if (widget.userData['pet'] == '고양이') {
       catfiltering();
     }
   }
@@ -57,13 +61,13 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   void catfiltering() {
     filteringData = petfood;
     calCatGAS();
-    filteringData = filteringGeneral(filteringData, widget.pet);
+    filteringData = filteringGeneral(filteringData, widget.userData['pet']);
     print(filteringData.length);
-    filteringData = filteringAlg(filteringData, widget.alg);
+    filteringData = filteringAlg(filteringData, widget.userData['alg']);
     print(filteringData.length);
-    filteringData = filteringHealth(filteringData, widget.health);
+    filteringData = filteringHealth(filteringData, widget.userData['health']);
     print(filteringData.length);
-    if (widget.bcsScore == 2) {
+    if (widget.userData['bcs'] == 2) {
       filteringData = filteringBCS(filteringData);
     }
   }
@@ -72,24 +76,24 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     calSize();
     calDogGAS();
     filteringData = petfood;
-    filteringData = filteringGeneral(filteringData, widget.pet);
+    filteringData = filteringGeneral(filteringData, widget.userData['pet']);
     print(filteringData.length);
-    filteringData = filteringAlg(filteringData, widget.alg);
+    filteringData = filteringAlg(filteringData, widget.userData['alg']);
     print(filteringData.length);
-    filteringData = filteringHealth(filteringData, widget.health);
+    filteringData = filteringHealth(filteringData, widget.userData['health']);
     print(filteringData.length);
     filteringData = filteringAge(filteringData, GAS);
     print(filteringData.length);
     filteringData = filteringSize(filteringData, size);
     print(filteringData.length);
-    if (widget.bcsScore == 2) {
+    if (widget.userData['bcs'] == 2) {
       filteringData = filteringBCS(filteringData);
     }
   }
 
   void calSize() {
     for (var i = 0; i < dogBreed.length; i++) {
-      if (dogBreed[i]['breed'] == widget.breed) {
+      if (dogBreed[i]['breed'] == widget.userData['breed']) {
         size = dogBreed[i]['size'];
 
         if (size == '대형견(초)' || size == '대형견') {

@@ -133,6 +133,7 @@ class _SelectPageState extends State<SelectPage> {
             showDialog(
               context: context,
               builder: (BuildContext context) => AlertDialog(
+                scrollable: true,
 //                title: Text("이름"),
                 content: Builder(builder: (context) {
                   return Container(
@@ -144,8 +145,8 @@ class _SelectPageState extends State<SelectPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    height: MediaQuery.of(context).size.height - 400,
-                    width: MediaQuery.of(context).size.width - 400,
+                    height: MediaQuery.of(context).size.height - 300,
+                    width: MediaQuery.of(context).size.width - 350,
                     child: Row(
                       children: [
                         Container(
@@ -270,10 +271,12 @@ class _SelectPageState extends State<SelectPage> {
                               SizedBox(
                                 height: 6,
                               ),
-                              Text(
-                                  subData[selectedItemId][index]["ingredient"]
-                                      .toString(),
-                                  softWrap: true),
+                              SingleChildScrollView(
+                                child: Text(
+                                    subData[selectedItemId][index]["ingredient"]
+                                        .toString(),
+                                    softWrap: true),
+                              ),
                               Text(subData[selectedItemId][index]["caution"]
                                   .toString()),
                             ],
