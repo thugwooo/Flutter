@@ -56,6 +56,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
             inputBcs(),
             inputAlg(),
             inputHealth(),
+            if (!algBool) SizedBox(height: 160),
             submitButton(),
           ],
         ),

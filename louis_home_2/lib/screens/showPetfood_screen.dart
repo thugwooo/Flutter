@@ -130,7 +130,33 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: mainAppBar,
-      body: showPetfood(),
+      body: Column(
+        children: [
+          explain(),
+          showPetfood(),
+        ],
+      ),
+    );
+  }
+
+  Widget explain() {
+    return Container(
+      child: Row(
+        children: [
+          Text(
+            widget.userData['name'],
+            style: smallStyle,
+          ),
+          Text(
+            '은/는    ',
+            style: smallStyle,
+          ),
+          Text(widget.userData['alg'].toString(), style: smallStyle),
+          Text('  에 알러지가 있고    ', style: smallStyle),
+          Text(widget.userData['health'].toString(), style: smallStyle),
+          Text('  질환이 있으므로    ', style: smallStyle),
+        ],
+      ),
     );
   }
 

@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Form(
         key: _formKey,
         child: Center(
-          child: ListView(
+          child: Column(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.15,
@@ -186,11 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 })));
         print(userData);
-        /*Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return SurveyScreen(
-            userData: userData,
-          );
-        }));*/
       },
     );
   }
