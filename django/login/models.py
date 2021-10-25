@@ -16,6 +16,6 @@ class userData(models.Model):
     bcs = models.TextField()
     alg = models.TextField()
     health = models.TextField()
-    petfood = models.TextField(null = True)
+    petfood = models.TextField(default="")
 
 

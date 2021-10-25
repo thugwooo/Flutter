@@ -49,7 +49,6 @@ class _LoginScreenState extends State<LoginScreen> {
           userData['bcs'] = pasingData[i]['bcs'];
           userData['alg'] = pasingData[i]['alg'];
           userData['health'] = pasingData[i]['health'];
-          print(pasingData[i]['health']);
         }
       }
       return userData;

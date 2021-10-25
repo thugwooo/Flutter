@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,8 +25,10 @@ class _SurveyScreenState extends State<SurveyScreen> {
   @override
   void initState() {
     super.initState();
-    algList = widget.userData['alg'];
-    healthList = widget.userData['health'];
+    algList = widget.userData['alg'].split("'");
+    print(algList.length);
+    print(algList);
+    healthList = widget.userData['health'].split("'");
     if (algList.length > 0) {
       algBool = true;
     }
@@ -591,6 +595,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                 ),
                 onTap: () {
                   setState(() {
+                    print(healthList);
                     healthList.contains(widget.userData['pet'] == '강아지'
                             ? dogHealth[index]
                             : catHealth[index])
