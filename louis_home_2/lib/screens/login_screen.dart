@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:louis_home_2/data/petfood.dart';
 import 'package:louis_home_2/data/style.dart';
+import 'package:louis_home_2/data/surveyData.dart';
 import 'package:louis_home_2/screens/survey_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,13 +26,15 @@ class _LoginScreenState extends State<LoginScreen> {
     "neu": "0",
     "weight": "0",
     "bcs": "0",
-    "alg": ["'"],
-    "health": ["'"],
+    "alg": [],
+    "health": [],
   };
 
   Future<dynamic> getUserData(url) async {
     var url2 = Uri.parse(url);
-
+    var tmpAlg, tmpHealth;
+    var algList = [];
+    var healthList = [];
     Response response = await get(url2);
 
     if (response.statusCode == 200) {
@@ -47,10 +51,24 @@ class _LoginScreenState extends State<LoginScreen> {
           userData['neu'] = pasingData[i]['neu'];
           userData['weight'] = pasingData[i]['weight'];
           userData['bcs'] = pasingData[i]['bcs'];
-          userData['alg'] = pasingData[i]['alg'];
-          userData['health'] = pasingData[i]['health'];
+          tmpAlg = userData['pet'] == '강아지' ? dogAlg : catAlg;
+          tmpHealth = userData['pet'] == '강아지' ? dogHealth : catHealth;
+          for (var j = 0; j < tmpAlg.length; j++) {
+            if (pasingData[i]['alg'].contains(tmpAlg[j])) {
+              algList.add(tmpAlg[j]);
+            }
+          }
+          userData['alg'] = algList;
+          for (var j = 0; j < tmpHealth.length; j++) {
+            if (pasingData[i]['health'].contains(tmpHealth[j])) {
+              healthList.add(tmpHealth[j]);
+            }
+          }
+          userData['health'] = healthList;
         }
       }
+      print(userData['alg']);
+
       return userData;
     } else {
       print(response.statusCode);
@@ -62,13 +80,21 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: mainAppBar,
       body: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            textFormName(),
-            textFormPhoneNumber(),
-            submitButton(),
-          ],
+        child: Center(
+          child: ListView(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+              Image.asset(
+                'images/png/루이스홈 로고BLUE.png',
+                width: MediaQuery.of(context).size.width * 0.5,
+              ),
+              textFormName(),
+              textFormPhoneNumber(),
+              submitButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -78,8 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       margin: EdgeInsets.all(10),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(
             width: 10,
           ),
@@ -111,8 +138,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       margin: EdgeInsets.all(10),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(
             width: 10,
           ),
@@ -142,6 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget submitButton() {
     return ElevatedButton(
       child: Text('제출'),
+      style: ElevatedButton.styleFrom(primary: Colors.grey),
       onPressed: () {
         _formKey.currentState!.save();
         userData['pet'] == '강아지'

@@ -6,15 +6,15 @@ TextStyle smallStyle = TextStyle(
 );
 AppBar mainAppBar = AppBar(
   backgroundColor: colors[0],
-  leading: whiteLogo,
-  title: Text('LouisHome'),
+  title: whiteLogo,
 );
 Image whiteLogo = Image.asset(
-  'images/png/LOGO-WHITE.png',
+  'images/png/루이스홈 세로.png',
+  width: 200,
 );
 Image blueLogo = Image.asset(
-  'images/png/LOGO-BLUE.png',
-  width: 40,
+  'images/png/BLUE_CIRCLE.png',
+  width: 20,
 );
 var colors = [Color.fromRGBO(0, 36, 79, 1), Colors.grey];
 dynamic louisBlueDeco(var index, var selectedItem) {

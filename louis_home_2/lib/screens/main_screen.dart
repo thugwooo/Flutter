@@ -13,13 +13,29 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainAppBar,
+      appBar: AppBar(
+        backgroundColor: colors[0],
+      ),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Column(
           children: [
-            button('신규 회원', RegisterScreen()),
-            button('기존 회원', LoginScreen()),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+            Image.asset(
+              'images/png/루이스홈 로고BLUE.png',
+              width: MediaQuery.of(context).size.width * 0.5,
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                button('기존 회원', LoginScreen()),
+                button('신규 회원', RegisterScreen()),
+              ],
+            ),
           ],
         ),
       ),
@@ -29,12 +45,13 @@ class _MainScreenState extends State<MainScreen> {
   Widget button(var text, var nav) {
     return InkWell(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
-        width: MediaQuery.of(context).size.width * 0.3,
+        margin: EdgeInsets.symmetric(horizontal: 50),
+        height: MediaQuery.of(context).size.height * 0.12,
+        width: MediaQuery.of(context).size.width * 0.27,
         decoration: BoxDecoration(
           border: Border.all(
             color: Color.fromRGBO(0, 36, 79, 1),
-            width: 3,
+            width: 5,
           ),
           borderRadius: BorderRadius.circular(20),
         ),
@@ -42,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
           ),

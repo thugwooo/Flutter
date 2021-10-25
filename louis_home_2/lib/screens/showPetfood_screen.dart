@@ -20,6 +20,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   var birthMonth;
   var gas;
   var size;
+  var selectedPetfoodId;
   @override
   void initState() {
     super.initState();
@@ -46,6 +47,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
 
       filteredPetfood = filteringSize(filteredPetfood, size);
       print('size' + filteredPetfood.length.toString());
+
       filteredPetfood = filteringAge(filteredPetfood, gas);
       print('age' + filteredPetfood.length.toString());
     } else if (widget.userData['pet'] == '고양이') {
@@ -135,31 +137,40 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   Widget showPetfood() {
     return Center(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.9,
-        width: MediaQuery.of(context).size.width * 0.95,
+        height: MediaQuery.of(context).size.height * 0.3,
+        width: MediaQuery.of(context).size.width,
+        /*
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
             color: colors[0],
           ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: GridView.builder(
+          borderRadius: BorderRadius.circular(10),
+        ),*/
+
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
           itemCount: filteredPetfood.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            childAspectRatio: 2 / 3,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 0,
-          ),
           itemBuilder: (context, index) => InkWell(
             child: Container(
-              margin: EdgeInsets.all(10),
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.of(context).size.width * 0.28,
+              margin: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: colors[0],
-                  width: 3,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: selectedPetfoodId == index ? colors[0] : Colors.grey,
+                    offset: Offset(0, 2),
+                    blurRadius: 2.0,
+                    spreadRadius: 2.0,
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(0, 0),
+                    blurRadius: 1.0,
+                    spreadRadius: 1.0,
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Center(
@@ -181,16 +192,26 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     scrollable: true,
+                    actionsPadding: EdgeInsets.only(right: 18),
                     actions: [
-                      ElevatedButton(
-                        onPressed: () {
-                          widget.userData['petfood'] =
-                              filteredPetfood[index]['name'];
-                          print(widget.userData);
-                          saveuserData(
-                              'http://10.0.2.2:8000/server/saveuserData/');
-                        },
-                        child: Text('저장'),
+                      Container(
+                        width: 100,
+                        height: 40,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            selectedPetfoodId = index;
+                            widget.userData['petfood'] =
+                                filteredPetfood[index]['name'];
+                            print(widget.userData);
+                            saveuserData(
+                                'http://10.0.2.2:8000/server/saveuserData/');
+                          },
+                          child: Text(
+                            'SAVE',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          style: ElevatedButton.styleFrom(primary: Colors.grey),
+                        ),
                       ),
                     ],
                     content: Builder(

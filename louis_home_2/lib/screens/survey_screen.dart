@@ -19,25 +19,17 @@ class _SurveyScreenState extends State<SurveyScreen> {
   final _formKey = GlobalKey<FormState>();
   var algBool = false;
   var selectedAlgId = 1;
-  var algList;
-  var healthList;
+  var algList = [];
+  var healthList = [];
 
   @override
   void initState() {
     super.initState();
-    print(widget.userData['alg'] is String);
-    if (widget.userData['alg'] is String) {
-      algList = widget.userData['alg'].split("'");
-      if (algList.length > 0) {
-        algBool = true;
-      }
-    } else {
-      algList = widget.userData['alg'];
-    }
-    if (widget.userData['health'] is String) {
-      healthList = widget.userData['health'].split("'");
-    } else {
-      healthList = widget.userData['health'];
+    algList = widget.userData['alg'];
+    healthList = widget.userData['health'];
+    if (algList.length > 0) {
+      algBool = true;
+      print(algBool);
     }
   }
 
@@ -76,7 +68,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       margin: EdgeInsets.all(10),
       child: Row(
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(width: 10),
           Text(
             widget.userData['pet'] == '강아지' ? '반 려 견   이 름' : '반 려 묘   이 름',
@@ -84,18 +76,15 @@ class _SurveyScreenState extends State<SurveyScreen> {
           ),
           SizedBox(width: 40),
           SizedBox(
-            width: 200,
-            height: 40,
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: widget.userData['name'],
+            width: 100,
+            height: 36,
+            child: Text(
+              widget.userData['name'],
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: colors[0],
               ),
-              onSaved: (value) {
-                if (value!.length > 0) {
-                  widget.userData['name'] = value;
-                }
-              },
             ),
           ),
         ],
@@ -108,7 +97,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       margin: EdgeInsets.all(10),
       child: Row(
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(width: 10),
           Text(
             widget.userData['pet'] == '강아지'
@@ -143,7 +132,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       margin: EdgeInsets.all(10),
       child: Row(
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(width: 10),
           Text(
             '생   년   월   일',
@@ -244,7 +233,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       margin: EdgeInsets.all(10),
       child: Row(
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(width: 10),
           Text('성                별', style: smallStyle),
           SizedBox(width: 30),
@@ -342,7 +331,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       margin: EdgeInsets.all(10),
       child: Row(
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(
             width: 10,
           ),
@@ -384,7 +373,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(width: 10),
           Text('체                형', style: smallStyle),
           SizedBox(width: 20),
@@ -445,7 +434,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
         children: [
           Row(
             children: [
-              blueLogo,
+              //blueLogo,
               SizedBox(
                 width: 10,
               ),
@@ -492,6 +481,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
               ),
             ],
           ),
+          SizedBox(height: 15),
           if (algBool)
             Container(
               margin: EdgeInsets.symmetric(horizontal: 50),
@@ -517,7 +507,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                             : colors[1],
                         width: 3,
                       ),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Text(
@@ -542,6 +532,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                                 ? dogAlg[index]
                                 : catAlg[index]);
                         widget.userData['alg'] = algList;
+                        print(widget.userData['alg']);
                       },
                     );
                   },
@@ -560,11 +551,12 @@ class _SurveyScreenState extends State<SurveyScreen> {
         children: [
           Row(
             children: [
-              blueLogo,
+              //blueLogo,
               SizedBox(width: 10),
               Text('건  강    관  리', style: smallStyle),
             ],
           ),
+          SizedBox(height: 20),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 50),
             height: 150,
@@ -588,7 +580,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                           : colors[1],
                       width: 3,
                     ),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
                     child: Text(
@@ -624,18 +616,23 @@ class _SurveyScreenState extends State<SurveyScreen> {
   }
 
   Widget submitButton() {
-    return ElevatedButton(
-      child: Text('제출'),
-      onPressed: () {
-        _formKey.currentState!.save();
+    return Container(
+      child: ElevatedButton(
+        child: Text('CURATION'),
+        style: ElevatedButton.styleFrom(
+          primary: Colors.grey,
+        ),
+        onPressed: () {
+          _formKey.currentState!.save();
 
-        print(widget.userData);
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ShowPetfoodScreen(
-            userData: widget.userData,
-          );
-        }));
-      },
+          print(widget.userData);
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ShowPetfoodScreen(
+              userData: widget.userData,
+            );
+          }));
+        },
+      ),
     );
   }
 }

@@ -34,15 +34,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainAppBar,
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: colors[0],
+      ),
       body: Form(
         key: _formKey,
         child: Column(
           children: [
-            SizedBox(height: 20),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+            Image.asset(
+              'images/png/루이스홈 로고BLUE.png',
+              width: MediaQuery.of(context).size.width * 0.5,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            selectPet(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
+            ),
             textFormName(),
             textFormPhoneNumber(),
-            selectPet(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
             submitButton(),
           ],
         ),
@@ -54,8 +75,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Container(
       margin: EdgeInsets.all(10),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          blueLogo,
           SizedBox(
             width: 10,
           ),
@@ -87,8 +108,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Container(
       margin: EdgeInsets.all(10),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          blueLogo,
+          //blueLogo,
           SizedBox(
             width: 10,
           ),
@@ -151,7 +173,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Widget submitButton() {
     return ElevatedButton(
-      child: Text('제출'),
+      child: Text('다음'),
+      style: ElevatedButton.styleFrom(primary: Colors.grey),
       onPressed: () {
         _formKey.currentState!.save();
         userData['pet'] == '강아지'

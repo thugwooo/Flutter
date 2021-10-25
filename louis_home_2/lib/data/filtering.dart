@@ -95,13 +95,15 @@ dynamic filteringAge(var filteringData, var key) {
   if (key == 'G(3~)') {
     for (var i = 0; i < filteringData.length; i++) {
       if (filteringData[i]['age'].contains(key) ||
-          filteringData[i]['age'].contains('G')) {
+          filteringData[i]['age'].contains('G') ||
+          filteringData[i]['age'].contains('무관')) {
         filteredData.add(filteringData[i]);
       }
     }
   } else {
     for (var i = 0; i < filteringData.length; i++) {
-      if (filteringData[i]['age'].contains(key)) {
+      if (filteringData[i]['age'].contains(key) ||
+          filteringData[i]['age'].contains('무관')) {
         filteredData.add(filteringData[i]);
       }
     }
