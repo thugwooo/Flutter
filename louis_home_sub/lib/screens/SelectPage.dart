@@ -145,7 +145,7 @@ class _SelectPageState extends State<SelectPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    height: MediaQuery.of(context).size.height - 300,
+                    height: MediaQuery.of(context).size.height - 200,
                     width: MediaQuery.of(context).size.width - 350,
                     child: Row(
                       children: [
@@ -271,13 +271,12 @@ class _SelectPageState extends State<SelectPage> {
                               SizedBox(
                                 height: 6,
                               ),
-                              SingleChildScrollView(
-                                child: Text(
-                                    subData[selectedItemId][index]["ingredient"]
-                                        .toString(),
-                                    softWrap: true),
-                              ),
-                              Text(subData[selectedItemId][index]["caution"]
+                              Text(
+                                  subData[selectedItemId][index]["ingredient"]
+                                      .toString(),
+                                  softWrap: true),
+                              SizedBox(height: 6),
+                              Text(subData[selectedItemId][index]["cautionExp"]
                                   .toString()),
                             ],
                           ),
