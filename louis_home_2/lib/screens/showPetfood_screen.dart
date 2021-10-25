@@ -168,6 +168,9 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                     Text('사진'),
                     Text(filteredPetfood[index]['brand'].toString()),
                     Text(filteredPetfood[index]['name'].toString()),
+                    Text(
+                      filteredPetfood[index]['hash'].toString(),
+                    ),
                   ],
                 ),
               ),

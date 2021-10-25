@@ -24,8 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
     "neu": "0",
     "weight": "0",
     "bcs": "0",
-    "alg": [],
-    "health": [],
+    "alg": ["'"],
+    "health": ["'"],
   };
 
   Future<dynamic> getUserData(url) async {

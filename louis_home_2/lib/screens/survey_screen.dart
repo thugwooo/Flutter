@@ -25,12 +25,19 @@ class _SurveyScreenState extends State<SurveyScreen> {
   @override
   void initState() {
     super.initState();
-    algList = widget.userData['alg'].split("'");
-    print(algList.length);
-    print(algList);
-    healthList = widget.userData['health'].split("'");
-    if (algList.length > 0) {
-      algBool = true;
+    print(widget.userData['alg'] is String);
+    if (widget.userData['alg'] is String) {
+      algList = widget.userData['alg'].split("'");
+      if (algList.length > 0) {
+        algBool = true;
+      }
+    } else {
+      algList = widget.userData['alg'];
+    }
+    if (widget.userData['health'] is String) {
+      healthList = widget.userData['health'].split("'");
+    } else {
+      healthList = widget.userData['health'];
     }
   }
 
