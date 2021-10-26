@@ -6,6 +6,7 @@ import 'package:louis_home_2/data/breed.dart';
 import 'package:louis_home_2/data/filtering.dart';
 import 'package:louis_home_2/data/petfood.dart';
 import 'package:louis_home_2/data/style.dart';
+import 'package:louis_home_2/screens/main_screen.dart';
 
 class ShowPetfoodScreen extends StatefulWidget {
   var userData;
@@ -134,9 +135,20 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
         children: [
           explain(),
           showPetfood(),
+          returnButton(),
         ],
       ),
     );
+  }
+
+  Widget returnButton() {
+    return ElevatedButton(
+        child: Text('첫 화면으로'),
+        onPressed: () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+          Navigator.pop(context);
+        });
   }
 
   Widget explain() {

@@ -29,6 +29,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
     healthList = widget.userData['health'];
     if (algList.length > 0) {
       algBool = true;
+      selectedAlgId = 0;
       print(algBool);
     }
   }
