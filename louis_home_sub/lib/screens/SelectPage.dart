@@ -17,7 +17,9 @@ class _SelectPageState extends State<SelectPage> {
     '미스트',
     '치약',
   ];
+  var pet = ['전체', '강아지', '고양이'];
   var selectedItemId = 0;
+  var selectedPetId = 0;
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
@@ -50,32 +52,73 @@ class _SelectPageState extends State<SelectPage> {
       height: 800,
       width: 140,
       margin: EdgeInsets.all(40),
-      child: ListView.builder(
-        itemCount: itemName.length,
-        itemBuilder: (context, index) => InkWell(
-          child: Container(
-            margin: EdgeInsets.all(6),
-            decoration: BoxDecoration(
-                border: Border.all(
-                  width: 4,
-                  color: index == selectedItemId ? colors[0] : colors[1],
-                ),
-                borderRadius: BorderRadius.circular(10)),
+      child: Column(
+        children: [
+          Container(
             width: 100,
-            height: 60,
-            child: Center(
-              child: Text(
-                itemName[index],
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            height: 450,
+            child: ListView.builder(
+              itemCount: itemName.length,
+              itemBuilder: (context, index) => InkWell(
+                child: Container(
+                  margin: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 4,
+                        color: index == selectedItemId ? colors[0] : colors[1],
+                      ),
+                      borderRadius: BorderRadius.circular(10)),
+                  width: 100,
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      itemName[index],
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedItemId = index;
+                  });
+                },
               ),
             ),
           ),
-          onTap: () {
-            setState(() {
-              selectedItemId = index;
-            });
-          },
-        ),
+          Container(
+            width: 100,
+            height: 230,
+            child: ListView.builder(
+              itemCount: pet.length,
+              itemBuilder: (context, index) => InkWell(
+                child: Container(
+                  margin: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 4,
+                        color: index == selectedPetId ? colors[0] : colors[1],
+                      ),
+                      borderRadius: BorderRadius.circular(10)),
+                  width: 100,
+                  height: 60,
+                  child: Center(
+                    child: Text(
+                      pet[index],
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedPetId = index;
+                  });
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -86,8 +129,8 @@ class _SelectPageState extends State<SelectPage> {
       width: 1000,
       height: 700,
       child: GridView.builder(
-        itemCount:
-            subData[selectedItemId].length, //여기에 selectedItemId 를 통해 구현해야함
+        itemCount: subData[selectedItemId][selectedPetId]
+            .length, //여기에 selectedItemId 를 통해 구현해야함
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 5,
           childAspectRatio: 2 / 3,
@@ -120,7 +163,8 @@ class _SelectPageState extends State<SelectPage> {
                 Image.asset(
                   //'lib/images/sub/강아지 버블 샴푸.png',
                   'lib/images/sub/' +
-                      subData[selectedItemId][index]["name"].toString() +
+                      subData[selectedItemId][selectedPetId][index]["name"]
+                          .toString() +
                       ".png",
                   width: 150,
                   height: 150,
@@ -128,10 +172,13 @@ class _SelectPageState extends State<SelectPage> {
                 SizedBox(
                   height: 15,
                 ),
-                Text(subData[selectedItemId][index]["brand"].toString(),
+                Text(
+                    subData[selectedItemId][selectedPetId][index]["brand"]
+                        .toString(),
                     style: TextStyle(color: Colors.grey[700])),
                 Text(
-                  subData[selectedItemId][index]["name"].toString(),
+                  subData[selectedItemId][selectedPetId][index]["name"]
+                      .toString(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -177,7 +224,8 @@ class _SelectPageState extends State<SelectPage> {
                                 height: 200,
                                 child: Image.asset(
                                   'lib/images/sub/' +
-                                      subData[selectedItemId][index]["name"]
+                                      subData[selectedItemId][selectedPetId]
+                                              [index]["name"]
                                           .toString() +
                                       ".png",
                                   width: 100,
@@ -186,7 +234,8 @@ class _SelectPageState extends State<SelectPage> {
                               ),
                               SizedBox(height: 20),
                               Text(
-                                subData[selectedItemId][index]["brand"]
+                                subData[selectedItemId][selectedPetId][index]
+                                        ["brand"]
                                     .toString(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -194,7 +243,8 @@ class _SelectPageState extends State<SelectPage> {
                                 ),
                               ),
                               Text(
-                                subData[selectedItemId][index]["name"]
+                                subData[selectedItemId][selectedPetId][index]
+                                        ["name"]
                                     .toString(),
                                 style: TextStyle(
                                   fontSize: 20,
@@ -243,7 +293,8 @@ class _SelectPageState extends State<SelectPage> {
                                     ),
                                   ),
                                   Text(
-                                    subData[selectedItemId][index]["scent"]
+                                    subData[selectedItemId][selectedPetId]
+                                            [index]["scent"]
                                         .toString(),
                                     style: TextStyle(
                                       fontSize: 20,
@@ -264,7 +315,8 @@ class _SelectPageState extends State<SelectPage> {
                                     ),
                                   ),
                                   Text(
-                                    subData[selectedItemId][index]["scentIn"]
+                                    subData[selectedItemId][selectedPetId]
+                                            [index]["scentIn"]
                                         .toString(),
                                     style: TextStyle(
                                       fontSize: 20,
@@ -276,7 +328,8 @@ class _SelectPageState extends State<SelectPage> {
                                 height: 10,
                               ),
                               Text(
-                                subData[selectedItemId][index]["hash"]
+                                subData[selectedItemId][selectedPetId][index]
+                                        ["hash"]
                                     .toString(),
                                 style: TextStyle(
                                   color: colors[0],
@@ -298,12 +351,14 @@ class _SelectPageState extends State<SelectPage> {
                                 height: 6,
                               ),
                               Text(
-                                  subData[selectedItemId][index]["ingredient"]
+                                  subData[selectedItemId][selectedPetId][index]
+                                          ["ingredient"]
                                       .toString(),
                                   style: TextStyle(fontSize: 13),
                                   softWrap: true),
                               SizedBox(height: 6),
-                              Text(subData[selectedItemId][index]["cautionExp"]
+                              Text(subData[selectedItemId][selectedPetId][index]
+                                      ["cautionExp"]
                                   .toString()),
                             ],
                           ),
