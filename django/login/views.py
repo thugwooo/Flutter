@@ -32,5 +32,6 @@ def saveuserData(request):
     user.bcs = data['bcs']
     user.alg = data['alg']
     user.health = data['health']
+    user.petfood = data['petfood']
     user.save()
     return Response("access")

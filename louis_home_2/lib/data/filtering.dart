@@ -57,6 +57,7 @@ dynamic filteringHealth(var filteringData, var key) {
         }
       }
       if (flag) {
+        print(filteringData[i]['name']);
         filteredData.add(filteringData[i]);
       }
     }
@@ -67,10 +68,10 @@ dynamic filteringHealth(var filteringData, var key) {
         if (filteringData[i]['health'].contains(key[j])) {
           flag = true;
         }
-
-        if (flag) {
-          filteredData.add(filteringData[i]);
-        }
+      }
+      if (flag) {
+        print(filteringData[i]['name']);
+        filteredData.add(filteringData[i]);
       }
     }
   }

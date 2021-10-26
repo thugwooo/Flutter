@@ -231,6 +231,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                             print(widget.userData);
                             saveuserData(
                                 'http://10.0.2.2:8000/server/saveuserData/');
+                            Navigator.pop(context);
                           },
                           child: Text(
                             'SAVE',

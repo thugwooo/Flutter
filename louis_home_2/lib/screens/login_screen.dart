@@ -65,6 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           }
           userData['health'] = healthList;
+          break;
         }
       }
       print(userData['alg']);
