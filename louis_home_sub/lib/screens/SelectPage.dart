@@ -24,9 +24,16 @@ class _SelectPageState extends State<SelectPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colors[0],
-        leading: Image.asset(
-          'lib/images/png/LOGO-WHITE.png',
-          width: 30,
+        title: Row(
+          children: [
+            SizedBox(
+              width: 25,
+            ),
+            Image.asset(
+              'lib/images/png/루이스홈 세로.png',
+              width: 200,
+            ),
+          ],
         ),
       ),
       body: Row(
@@ -119,12 +126,20 @@ class _SelectPageState extends State<SelectPage> {
                   height: 150,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
-                Text(subData[selectedItemId][index]["brand"].toString()),
-                Text(subData[selectedItemId][index]["name"].toString()),
+                Text(subData[selectedItemId][index]["brand"].toString(),
+                    style: TextStyle(color: Colors.grey[700])),
+                Text(
+                  subData[selectedItemId][index]["name"].toString(),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   '가격',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -149,6 +164,9 @@ class _SelectPageState extends State<SelectPage> {
                     width: MediaQuery.of(context).size.width - 350,
                     child: Row(
                       children: [
+                        SizedBox(
+                          width: 30,
+                        ),
                         Container(
                           width: 300,
                           child: Column(
@@ -205,15 +223,23 @@ class _SelectPageState extends State<SelectPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 80,
+                                height: 150,
                               ),
                               Row(
                                 children: [
                                   Text(
-                                    "•  향               ",
+                                    "•  향",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
+                                    ),
+                                  ),
+                                  Text(
+                                    " 강도       ",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
@@ -274,6 +300,7 @@ class _SelectPageState extends State<SelectPage> {
                               Text(
                                   subData[selectedItemId][index]["ingredient"]
                                       .toString(),
+                                  style: TextStyle(fontSize: 13),
                                   softWrap: true),
                               SizedBox(height: 6),
                               Text(subData[selectedItemId][index]["cautionExp"]
