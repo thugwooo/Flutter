@@ -6,7 +6,6 @@ import 'package:louis_home_2/data/breed.dart';
 import 'package:louis_home_2/data/filtering.dart';
 import 'package:louis_home_2/data/petfood.dart';
 import 'package:louis_home_2/data/style.dart';
-import 'package:louis_home_2/screens/main_screen.dart';
 
 class ShowPetfoodScreen extends StatefulWidget {
   var userData;
@@ -214,7 +213,12 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
               child: Center(
                 child: Column(
                   children: [
-                    Text('사진'),
+                    Image.asset(
+                      'images/petfood/' +
+                          filteredPetfood[index]['name'].toString() +
+                          '.png',
+                      width: 120,
+                    ),
                     Text(filteredPetfood[index]['brand'].toString()),
                     Text(filteredPetfood[index]['name'].toString()),
                     Text(
@@ -241,9 +245,18 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                             widget.userData['petfood'] =
                                 filteredPetfood[index]['name'];
                             print(widget.userData);
-                            saveuserData(
-                                'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
-                            Navigator.pop(context);
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    AlertDialog(actions: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            saveuserData(
+                                                'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('확인'))
+                                    ]));
                           },
                           child: Text(
                             'SAVE',
@@ -274,7 +287,13 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 child: Column(
                                   children: [
-                                    Text('사진'),
+                                    Image.asset(
+                                      'images/petfood/' +
+                                          filteredPetfood[index]['name']
+                                              .toString() +
+                                          '.png',
+                                      width: 120,
+                                    ),
                                     Text(filteredPetfood[index]['brand']
                                         .toString()),
                                     Text(filteredPetfood[index]['name']
