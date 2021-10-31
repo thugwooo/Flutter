@@ -131,9 +131,14 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     return Scaffold(
       appBar: mainAppBar,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           explain(),
+          SizedBox(height: 20),
           showPetfood(),
+          SizedBox(
+            height: 200,
+          ),
           returnButton(),
         ],
       ),
@@ -217,12 +222,24 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                       'images/petfood/' +
                           filteredPetfood[index]['name'].toString() +
                           '.png',
-                      width: 120,
+                      height: 180,
                     ),
-                    Text(filteredPetfood[index]['brand'].toString()),
-                    Text(filteredPetfood[index]['name'].toString()),
+                    Text(filteredPetfood[index]['brand'].toString(),
+                        style: TextStyle(color: Colors.grey[700])),
+                    Text(
+                      filteredPetfood[index]['name'].toString(),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                     Text(
                       filteredPetfood[index]['hash'].toString(),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '가격',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -246,17 +263,19 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                 filteredPetfood[index]['name'];
                             print(widget.userData);
                             showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    AlertDialog(actions: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            saveuserData(
-                                                'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('확인'))
-                                    ]));
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  AlertDialog(actions: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    saveuserData(
+                                        'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('확인'),
+                                ),
+                              ]),
+                            );
                           },
                           child: Text(
                             'SAVE',
@@ -292,7 +311,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                           filteredPetfood[index]['name']
                                               .toString() +
                                           '.png',
-                                      width: 120,
+                                      height: 300,
                                     ),
                                     Text(filteredPetfood[index]['brand']
                                         .toString()),

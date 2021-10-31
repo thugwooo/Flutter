@@ -159,7 +159,7 @@ class _SelectPageState extends State<SelectPage> {
                 width: 2,
                 color: colors[1],
               ),
-              color: Colors.grey,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -190,13 +190,13 @@ class _SelectPageState extends State<SelectPage> {
                 Text(
                   subData[selectedItemId][selectedPetId][index]["name"]
                       .toString(),
-                  style: TextStyle(fontSize: 15.5, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   subData[selectedItemId][selectedPetId][index]["price"]
                           .toString() +
                       ' 원',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
