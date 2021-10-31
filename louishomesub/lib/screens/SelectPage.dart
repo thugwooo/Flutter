@@ -21,6 +21,14 @@ class _SelectPageState extends State<SelectPage> {
   var selectedItemId = 0;
   var selectedPetId = 0;
   @override
+  void initState() {
+    super.initState();
+    print(subData[5][0].length);
+    print(subData[5][1].length);
+    print(subData[5][2].length);
+  }
+
+  @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
     return Scaffold(
@@ -32,7 +40,7 @@ class _SelectPageState extends State<SelectPage> {
               width: 25,
             ),
             Image.asset(
-              'lib/images/png/루이스홈 세로.png',
+              'images/png/루이스홈 세로.png',
               width: 200,
             ),
           ],
@@ -49,19 +57,19 @@ class _SelectPageState extends State<SelectPage> {
 
   Widget leftList() {
     return Container(
-      height: 800,
-      width: 140,
+      height: MediaQuery.of(context).size.height * 0.74,
+      width: MediaQuery.of(context).size.width * 0.09,
       margin: EdgeInsets.all(40),
       child: Column(
         children: [
           Container(
-            width: 100,
-            height: 450,
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width * 0.09,
             child: ListView.builder(
               itemCount: itemName.length,
               itemBuilder: (context, index) => InkWell(
                 child: Container(
-                  margin: EdgeInsets.all(6),
+                  margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       border: Border.all(
                         width: 4,
@@ -69,7 +77,7 @@ class _SelectPageState extends State<SelectPage> {
                       ),
                       borderRadius: BorderRadius.circular(10)),
                   width: 100,
-                  height: 60,
+                  height: 55,
                   child: Center(
                     child: Text(
                       itemName[index],
@@ -82,18 +90,21 @@ class _SelectPageState extends State<SelectPage> {
                   setState(() {
                     selectedItemId = index;
                   });
+                  print(selectedItemId);
+                  print(selectedPetId);
+                  print(index);
                 },
               ),
             ),
           ),
           Container(
-            width: 100,
-            height: 230,
+            height: MediaQuery.of(context).size.height * 0.24,
+            width: MediaQuery.of(context).size.width * 0.09,
             child: ListView.builder(
               itemCount: pet.length,
               itemBuilder: (context, index) => InkWell(
                 child: Container(
-                  margin: EdgeInsets.all(6),
+                  margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       border: Border.all(
                         width: 4,
@@ -101,7 +112,7 @@ class _SelectPageState extends State<SelectPage> {
                       ),
                       borderRadius: BorderRadius.circular(10)),
                   width: 100,
-                  height: 60,
+                  height: 55,
                   child: Center(
                     child: Text(
                       pet[index],
@@ -114,6 +125,9 @@ class _SelectPageState extends State<SelectPage> {
                   setState(() {
                     selectedPetId = index;
                   });
+                  print(selectedItemId);
+                  print(selectedPetId);
+                  print(index);
                 },
               ),
             ),
@@ -126,8 +140,8 @@ class _SelectPageState extends State<SelectPage> {
   Widget rightList() {
     return Container(
       margin: EdgeInsets.all(10),
-      width: 1000,
-      height: 700,
+      height: MediaQuery.of(context).size.height * 0.72,
+      width: MediaQuery.of(context).size.width * 0.75,
       child: GridView.builder(
         itemCount: subData[selectedItemId][selectedPetId]
             .length, //여기에 selectedItemId 를 통해 구현해야함
@@ -161,8 +175,8 @@ class _SelectPageState extends State<SelectPage> {
                   height: 10,
                 ),
                 Image.asset(
-                  //'lib/images/sub/강아지 버블 샴푸.png',
-                  'lib/images/sub/' +
+                  //'images/sub/릴라덴트 덴탈케어 미네랄.png',
+                  'images/sub/' +
                       subData[selectedItemId][selectedPetId][index]["name"]
                           .toString() +
                       ".png",
@@ -179,13 +193,15 @@ class _SelectPageState extends State<SelectPage> {
                 Text(
                   subData[selectedItemId][selectedPetId][index]["name"]
                       .toString(),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 15.5, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  '가격',
+                  subData[selectedItemId][selectedPetId][index]["price"]
+                          .toString() +
+                      ' 원',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -223,7 +239,7 @@ class _SelectPageState extends State<SelectPage> {
                                 width: 200,
                                 height: 200,
                                 child: Image.asset(
-                                  'lib/images/sub/' +
+                                  'images/sub/' +
                                       subData[selectedItemId][selectedPetId]
                                               [index]["name"]
                                           .toString() +
