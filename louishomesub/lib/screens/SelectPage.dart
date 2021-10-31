@@ -13,8 +13,7 @@ class _SelectPageState extends State<SelectPage> {
     '샴푸',
     '눈세정제',
     '귀세정제',
-    '에센스',
-    '미스트',
+    '에센스/미스트',
     '치약',
   ];
   var pet = ['전체', '강아지', '고양이'];
@@ -23,9 +22,6 @@ class _SelectPageState extends State<SelectPage> {
   @override
   void initState() {
     super.initState();
-    print(subData[5][0].length);
-    print(subData[5][1].length);
-    print(subData[5][2].length);
   }
 
   @override
@@ -58,13 +54,13 @@ class _SelectPageState extends State<SelectPage> {
   Widget leftList() {
     return Container(
       height: MediaQuery.of(context).size.height * 0.74,
-      width: MediaQuery.of(context).size.width * 0.09,
-      margin: EdgeInsets.all(40),
+      width: MediaQuery.of(context).size.width * 0.13,
+      margin: EdgeInsets.all(35),
       child: Column(
         children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.5,
-            width: MediaQuery.of(context).size.width * 0.09,
+            width: MediaQuery.of(context).size.width * 0.12,
             child: ListView.builder(
               itemCount: itemName.length,
               itemBuilder: (context, index) => InkWell(
@@ -98,26 +94,27 @@ class _SelectPageState extends State<SelectPage> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.24,
-            width: MediaQuery.of(context).size.width * 0.09,
+            margin: EdgeInsets.fromLTRB(70, 35, 0, 0),
+            height: MediaQuery.of(context).size.height * 0.19,
+            width: MediaQuery.of(context).size.width * 0.06,
             child: ListView.builder(
               itemCount: pet.length,
               itemBuilder: (context, index) => InkWell(
                 child: Container(
                   margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 4,
-                        color: index == selectedPetId ? colors[0] : colors[1],
-                      ),
-                      borderRadius: BorderRadius.circular(10)),
-                  width: 100,
-                  height: 55,
+                    border: Border.all(
+                      width: 2,
+                      color: index == selectedPetId ? colors[0] : colors[1],
+                    ),
+                  ),
+                  width: 80,
+                  height: 45,
                   child: Center(
                     child: Text(
                       pet[index],
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -191,6 +188,9 @@ class _SelectPageState extends State<SelectPage> {
                   subData[selectedItemId][selectedPetId][index]["name"]
                       .toString(),
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
                 ),
                 Text(
                   subData[selectedItemId][selectedPetId][index]["price"]

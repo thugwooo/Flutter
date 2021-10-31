@@ -237,7 +237,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      '가격',
+                      filteredPetfood[index]['price'].toString() + ' 원',
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
@@ -264,17 +264,25 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                             print(widget.userData);
                             showDialog(
                               context: context,
-                              builder: (BuildContext context) =>
-                                  AlertDialog(actions: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    saveuserData(
-                                        'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text('확인'),
-                                ),
-                              ]),
+                              builder: (BuildContext context) => AlertDialog(
+                                content: Text('저장하시겠습니까?'),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      saveuserData(
+                                          'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('확인'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('취소'),
+                                  )
+                                ],
+                              ),
                             );
                           },
                           child: Text(
@@ -306,6 +314,11 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                 width: MediaQuery.of(context).size.width * 0.3,
                                 child: Column(
                                   children: [
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.08,
+                                    ),
                                     Image.asset(
                                       'images/petfood/' +
                                           filteredPetfood[index]['name']
@@ -317,7 +330,9 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                         .toString()),
                                     Text(filteredPetfood[index]['name']
                                         .toString()),
-                                    Text('가격'),
+                                    Text(filteredPetfood[index]['price']
+                                            .toString() +
+                                        ' 원'),
                                   ],
                                 ),
                               ),
@@ -327,6 +342,11 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                 width: MediaQuery.of(context).size.width * 0.45,
                                 child: Column(
                                   children: [
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.08,
+                                    ),
                                     Text(
                                       filteredPetfood[index]['main_eff']
                                           .toString(),
