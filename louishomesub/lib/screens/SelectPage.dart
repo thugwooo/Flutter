@@ -183,9 +183,6 @@ class _SelectPageState extends State<SelectPage> {
                   width: 150,
                   height: 150,
                 ),
-                SizedBox(
-                  height: 15,
-                ),
                 Text(
                     subData[selectedItemId][selectedPetId][index]["brand"]
                         .toString(),
@@ -194,9 +191,6 @@ class _SelectPageState extends State<SelectPage> {
                   subData[selectedItemId][selectedPetId][index]["name"]
                       .toString(),
                   style: TextStyle(fontSize: 15.5, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 10,
                 ),
                 Text(
                   subData[selectedItemId][selectedPetId][index]["price"]
@@ -223,21 +217,22 @@ class _SelectPageState extends State<SelectPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    height: MediaQuery.of(context).size.height - 200,
-                    width: MediaQuery.of(context).size.width - 350,
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.8,
                     child: Row(
                       children: [
                         SizedBox(
                           width: 30,
                         ),
                         Container(
-                          width: 300,
+                          width: MediaQuery.of(context).size.width * 0.25,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: 200,
-                                height: 200,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                width: MediaQuery.of(context).size.width * 0.3,
                                 child: Image.asset(
                                   'images/sub/' +
                                       subData[selectedItemId][selectedPetId]
@@ -284,7 +279,7 @@ class _SelectPageState extends State<SelectPage> {
                           width: 10,
                         ),
                         Container(
-                          width: 500,
+                          width: MediaQuery.of(context).size.width * 0.4,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
