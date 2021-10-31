@@ -178,7 +178,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ? userData['breed'] = '그레이트 데인'
             : userData['breed'] = '데본렉스';
 
-        getUserData('http://10.0.2.2:8000/server/getuserData/')
+        getUserData(
+                'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/getuserData/')
             .then((value) => userData = value)
             .whenComplete(() =>
                 Navigator.push(context, MaterialPageRoute(builder: (context) {

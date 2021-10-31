@@ -242,7 +242,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                 filteredPetfood[index]['name'];
                             print(widget.userData);
                             saveuserData(
-                                'http://10.0.2.2:8000/server/saveuserData/');
+                                'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
                             Navigator.pop(context);
                           },
                           child: Text(
