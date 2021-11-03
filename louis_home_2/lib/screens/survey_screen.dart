@@ -83,8 +83,9 @@ class _SurveyScreenState extends State<SurveyScreen> {
             child: Text(
               widget.userData['name'],
               style: TextStyle(
+                fontFamily: 'NanumBarunGothic',
                 fontSize: 25,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w700,
                 color: colors[0],
               ),
             ),
@@ -114,6 +115,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
             width: 200,
             height: 40,
             child: DropdownSearch<String>(
+              dropdownSearchBaseStyle: TextStyle(
+                  fontFamily: 'NanumBarunGothic', fontWeight: FontWeight.bold),
               mode: Mode.MENU,
               showSelectedItems: true,
               items:
@@ -339,13 +342,20 @@ class _SurveyScreenState extends State<SurveyScreen> {
           ),
           Text(
             '몸       무     게',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'NanumBarunGothic',
+            ),
           ),
           SizedBox(width: 40),
           SizedBox(
-            width: 200,
+            width: 150,
             height: 40,
             child: TextFormField(
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: 'NanumBarunGothic', fontWeight: FontWeight.w700),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: widget.userData['weight'].toString(),
@@ -620,7 +630,11 @@ class _SurveyScreenState extends State<SurveyScreen> {
   Widget submitButton() {
     return Container(
       child: ElevatedButton(
-        child: Text('CURATION'),
+        child: Text(
+          'CURATION',
+          style: TextStyle(
+              fontFamily: 'NanumBarunGothic', fontWeight: FontWeight.w700),
+        ),
         style: ElevatedButton.styleFrom(
           primary: Colors.grey,
         ),

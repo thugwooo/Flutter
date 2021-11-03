@@ -60,7 +60,8 @@ class _MainScreenState extends State<MainScreen> {
             text,
             style: TextStyle(
               fontSize: 32,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w700,
+              fontFamily: 'NanumBarunGothic',
             ),
           ),
         ),

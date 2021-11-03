@@ -21,6 +21,21 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   var gas;
   var size;
   var selectedPetfoodId;
+  var data;
+  var showpetfoodStyle = [
+    TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'NanumBarunGothic',
+    ),
+    TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w700,
+      fontFamily: 'NanumBarunGothic',
+    ),
+    TextStyle(fontSize: 5),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -147,7 +162,10 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
 
   Widget returnButton() {
     return ElevatedButton(
-        child: Text('첫 화면으로'),
+        child: Text('첫 화면으로',
+            style: TextStyle(
+              fontFamily: 'NanumBarunGothic',
+            )),
         onPressed: () {
           Navigator.pop(context);
           Navigator.pop(context);
@@ -224,22 +242,42 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                           '.png',
                       height: 180,
                     ),
-                    Text(filteredPetfood[index]['brand'].toString(),
-                        style: TextStyle(color: Colors.grey[700])),
+                    Text(
+                      filteredPetfood[index]['brand'].toString(),
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'NanumBarunGothic',
+                      ),
+                    ),
                     Text(
                       filteredPetfood[index]['name'].toString(),
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'NanumBarunGothic',
+                      ),
                     ),
                     Text(
                       filteredPetfood[index]['hash'].toString(),
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'NanumBarunGothic',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Text(
-                      filteredPetfood[index]['price'].toString() + ' 원',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      filteredPetfood[index]['price'].toString() +
+                          ' 원 / ' +
+                          filteredPetfood[index]['volume'].toString(),
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'NanumBarunGothic',
+                      ),
                     ),
                   ],
                 ),
@@ -265,7 +303,12 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) => AlertDialog(
-                                content: Text('저장하시겠습니까?'),
+                                content: Text(
+                                  '저장하시겠습니까?',
+                                  style: TextStyle(
+                                    fontFamily: 'NanumBarunGothic',
+                                  ),
+                                ),
                                 actions: [
                                   ElevatedButton(
                                     onPressed: () {
@@ -273,13 +316,23 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                           'http://ec2-3-23-100-115.us-east-2.compute.amazonaws.com:8000/server/saveuserData/');
                                       Navigator.pop(context);
                                     },
-                                    child: Text('확인'),
+                                    child: Text(
+                                      '확인',
+                                      style: TextStyle(
+                                        fontFamily: 'NanumBarunGothic',
+                                      ),
+                                    ),
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('취소'),
+                                    child: Text(
+                                      '취소',
+                                      style: TextStyle(
+                                        fontFamily: 'NanumBarunGothic',
+                                      ),
+                                    ),
                                   )
                                 ],
                               ),
@@ -287,7 +340,11 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                           },
                           child: Text(
                             'SAVE',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'NanumBarunGothic',
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                           style: ElevatedButton.styleFrom(primary: Colors.grey),
                         ),
@@ -326,13 +383,33 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                           '.png',
                                       height: 300,
                                     ),
-                                    Text(filteredPetfood[index]['brand']
-                                        .toString()),
-                                    Text(filteredPetfood[index]['name']
-                                        .toString()),
-                                    Text(filteredPetfood[index]['price']
-                                            .toString() +
-                                        ' 원'),
+                                    Text(
+                                      filteredPetfood[index]['brand']
+                                          .toString(),
+                                      style: TextStyle(
+                                        color: Colors.grey[700],
+                                        fontFamily: 'NanumBarunGothic',
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    Text(
+                                      filteredPetfood[index]['name'].toString(),
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      filteredPetfood[index]['price']
+                                              .toString() +
+                                          ' 원 / ' +
+                                          filteredPetfood[index]['volume']
+                                              .toString(),
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontFamily: 'NanumBarunGothic',
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -341,17 +418,44 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                     MediaQuery.of(context).size.height * 0.5,
                                 width: MediaQuery.of(context).size.width * 0.45,
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.08,
                                     ),
-                                    Text(
-                                      filteredPetfood[index]['main_eff']
-                                          .toString(),
-                                      softWrap: true,
-                                    ),
+                                    for (var i = 0;
+                                        i <
+                                            filteredPetfood[index]['main_eff']
+                                                .length;
+                                        i++)
+                                      Row(
+                                        children: [
+                                          if (i % 3 == 0)
+                                            Icon(Icons.check_box,
+                                                color: Colors.red),
+                                          if (i % 3 == 0)
+                                            Text(
+                                              '\na',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          Text('\n',
+                                              style: TextStyle(fontSize: 13)),
+                                          Expanded(
+                                            child: Text(
+                                              filteredPetfood[index]['main_eff']
+                                                      [i]
+                                                  .toString(),
+                                              softWrap: true,
+                                              style: showpetfoodStyle[i % 3],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                   ],
                                 ),
                               ),

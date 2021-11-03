@@ -173,7 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Widget submitButton() {
     return ElevatedButton(
-      child: Text('다음'),
+      child: Text('다음', style: TextStyle(fontFamily: 'NanumBarunGothic')),
       style: ElevatedButton.styleFrom(primary: Colors.grey),
       onPressed: () {
         _formKey.currentState!.save();

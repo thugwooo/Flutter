@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 TextStyle smallStyle = TextStyle(
   fontSize: 25,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w700,
+  fontFamily: 'NanumBarunGothic',
 );
 AppBar mainAppBar = AppBar(
   backgroundColor: colors[0],

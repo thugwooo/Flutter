@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:louis_home_2/data/petfood.dart';
+
 import 'package:louis_home_2/data/style.dart';
 import 'package:louis_home_2/data/surveyData.dart';
 import 'package:louis_home_2/screens/survey_screen.dart';
@@ -170,7 +170,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget submitButton() {
     return ElevatedButton(
-      child: Text('제출'),
+      child: Text(
+        '제출',
+        style: TextStyle(fontFamily: 'NanumBarunGothic'),
+      ),
       style: ElevatedButton.styleFrom(primary: Colors.grey),
       onPressed: () {
         _formKey.currentState!.save();
