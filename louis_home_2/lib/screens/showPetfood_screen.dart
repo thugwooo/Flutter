@@ -374,7 +374,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                     SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.08,
+                                              0.04,
                                     ),
                                     Image.asset(
                                       'images/petfood/' +
@@ -423,7 +423,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                     SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.08,
+                                              0.04,
                                     ),
                                     for (var i = 0;
                                         i <
@@ -431,10 +431,14 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                                                 .length;
                                         i++)
                                       Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           if (i % 3 == 0)
-                                            Icon(Icons.check_box,
-                                                color: Colors.red),
+                                            Image.asset(
+                                              'images/png/check_box.png',
+                                              height: 30,
+                                            ),
                                           if (i % 3 == 0)
                                             Text(
                                               '\na',

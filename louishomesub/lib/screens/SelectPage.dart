@@ -102,7 +102,7 @@ class _SelectPageState extends State<SelectPage> {
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 2,
-                      color: index == selectedPetId ? colors[0] : colors[1],
+                      color: index == selectedPetId ? Colors.red : colors[1],
                     ),
                   ),
                   width: 80,
