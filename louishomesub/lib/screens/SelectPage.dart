@@ -172,11 +172,13 @@ class _SelectPageState extends State<SelectPage> {
                   height: 10,
                 ),
                 Image.asset(
-                  //'images/sub/릴라덴트 덴탈케어 미네랄.png',
+                  'images/sub/강아지 버블 샴푸.png',
+/*
                   'images/sub/' +
                       subData[selectedItemId][selectedPetId][index]["name"]
                           .toString() +
                       ".png",
+*/
                   width: 150,
                   height: 150,
                 ),
@@ -266,7 +268,10 @@ class _SelectPageState extends State<SelectPage> {
                                 height: 20,
                               ),
                               Text(
-                                '가격',
+                                subData[selectedItemId][selectedPetId][index]
+                                            ["price"]
+                                        .toString() +
+                                    ' 원',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
@@ -278,102 +283,10 @@ class _SelectPageState extends State<SelectPage> {
                         SizedBox(
                           width: 10,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 150,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "•  향",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  Text(
-                                    " 강도       ",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    subData[selectedItemId][selectedPetId]
-                                            [index]["scent"]
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 3,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "•  향 강도       ",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  Text(
-                                    subData[selectedItemId][selectedPetId]
-                                            [index]["scentIn"]
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                subData[selectedItemId][selectedPetId][index]
-                                        ["hash"]
-                                    .toString(),
-                                style: TextStyle(
-                                  color: colors[0],
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                "•  전성분      ",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Text(
-                                  subData[selectedItemId][selectedPetId][index]
-                                          ["ingredient"]
-                                      .toString(),
-                                  style: TextStyle(fontSize: 13),
-                                  softWrap: true),
-                              SizedBox(height: 6),
-                              Text(subData[selectedItemId][selectedPetId][index]
-                                      ["cautionExp"]
-                                  .toString()),
-                            ],
-                          ),
-                        )
+                        if (selectedItemId == 0) makeShampoo(index),
+                        if (0 < selectedItemId && selectedItemId < 4)
+                          makeEye(index),
+                        if (selectedItemId == 4) makeTooth(index),
                       ],
                     ),
                   );
@@ -381,6 +294,286 @@ class _SelectPageState extends State<SelectPage> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget makeShampoo(var index) {
+    return SingleChildScrollView(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.45,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 150,
+            ),
+            Row(
+              children: [
+                Text(
+                  "•  향",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  " 강도       ",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subData[selectedItemId][selectedPetId][index]["scent"]
+                      .toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 3,
+            ),
+            Row(
+              children: [
+                Text(
+                  "•  향 강도       ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  subData[selectedItemId][selectedPetId][index]["scentIn"]
+                      .toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "•  린스겸용       ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  subData[selectedItemId][selectedPetId][index]["rinse"]
+                      .toString(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              subData[selectedItemId][selectedPetId][index]["hash"].toString(),
+              style: TextStyle(
+                color: colors[0],
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "•  전성분      ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            Text(
+                subData[selectedItemId][selectedPetId][index]["ingredient"]
+                    .toString(),
+                style: TextStyle(fontSize: 13),
+                softWrap: true),
+            SizedBox(height: 6),
+            Text(subData[selectedItemId][selectedPetId][index]["cautionExp"]
+                .toString()),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget makeEye(var index) {
+    return SingleChildScrollView(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.45,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 150,
+            ),
+            Row(
+              children: [
+                Text(
+                  "•  향",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  " 강도       ",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subData[selectedItemId][selectedPetId][index]["scent"]
+                      .toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              subData[selectedItemId][selectedPetId][index]["hash"].toString(),
+              style: TextStyle(
+                color: colors[0],
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "•  전성분      ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            Text(
+                subData[selectedItemId][selectedPetId][index]["ingredient"]
+                    .toString(),
+                style: TextStyle(fontSize: 13),
+                softWrap: true),
+            SizedBox(height: 6),
+            Text(subData[selectedItemId][selectedPetId][index]["cautionExp"]
+                .toString()),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget makeTooth(var index) {
+    return SingleChildScrollView(
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.45,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 150,
+            ),
+            Row(
+              children: [
+                Text(
+                  "•  향",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  "약 사용 형태     ",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subData[selectedItemId][selectedPetId][index]["scent"]
+                      .toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "•  치약 사용 형태     ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  subData[selectedItemId][selectedPetId][index]["toothform"]
+                      .toString(),
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              subData[selectedItemId][selectedPetId][index]["hash"].toString(),
+              style: TextStyle(
+                color: colors[0],
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "•  전성분      ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 6,
+            ),
+            Text(
+                subData[selectedItemId][selectedPetId][index]["ingredient"]
+                    .toString(),
+                style: TextStyle(fontSize: 13),
+                softWrap: true),
+            SizedBox(height: 6),
+            Text(subData[selectedItemId][selectedPetId][index]["cautionExp"]
+                .toString()),
+          ],
         ),
       ),
     );

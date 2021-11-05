@@ -104,19 +104,19 @@ class _SurveyScreenState extends State<SurveyScreen> {
           SizedBox(width: 10),
           Text(
             widget.userData['pet'] == '강아지'
-                ? '견                 종'
-                : '묘                 종',
+                ? '견                  종'
+                : '묘                  종',
             style: smallStyle,
           ),
           SizedBox(
-            width: 40,
+            width: 35,
           ),
           SizedBox(
             width: 200,
             height: 40,
             child: DropdownSearch<String>(
               dropdownSearchBaseStyle: TextStyle(
-                  fontFamily: 'NanumBarunGothic', fontWeight: FontWeight.bold),
+                  fontFamily: 'NanumBarunGothic', fontWeight: FontWeight.w700),
               mode: Mode.MENU,
               showSelectedItems: true,
               items:
@@ -140,7 +140,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
           //blueLogo,
           SizedBox(width: 10),
           Text(
-            '생   년   월   일',
+            '생   년    월   일',
             style: smallStyle,
           ),
           SizedBox(width: 40),
