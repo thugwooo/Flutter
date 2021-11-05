@@ -16,7 +16,7 @@ class _SelectPageState extends State<SelectPage> {
     '에센스/미스트',
     '치약',
   ];
-  var pet = ['전체', '강아지', '고양이'];
+  var pet = ['강아지', '고양이'];
   var selectedItemId = 0;
   var selectedPetId = 0;
   @override
@@ -86,16 +86,13 @@ class _SelectPageState extends State<SelectPage> {
                   setState(() {
                     selectedItemId = index;
                   });
-                  print(selectedItemId);
-                  print(selectedPetId);
-                  print(index);
                 },
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(70, 35, 0, 0),
-            height: MediaQuery.of(context).size.height * 0.19,
+            margin: EdgeInsets.fromLTRB(70, 90, 0, 0),
+            height: MediaQuery.of(context).size.height * 0.125,
             width: MediaQuery.of(context).size.width * 0.06,
             child: ListView.builder(
               itemCount: pet.length,
@@ -122,9 +119,6 @@ class _SelectPageState extends State<SelectPage> {
                   setState(() {
                     selectedPetId = index;
                   });
-                  print(selectedItemId);
-                  print(selectedPetId);
-                  print(index);
                 },
               ),
             ),
