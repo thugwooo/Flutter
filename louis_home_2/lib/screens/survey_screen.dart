@@ -57,7 +57,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
             inputBcs(),
             inputAlg(),
             inputHealth(),
-            if (!algBool) SizedBox(height: 120),
+            if (!algBool) SizedBox(height: 90),
             submitButton(),
           ],
         ),
@@ -240,7 +240,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
         children: [
           //blueLogo,
           SizedBox(width: 10),
-          Text('성                별', style: smallStyle),
+          Text('성                  별', style: smallStyle),
           SizedBox(width: 30),
           Container(
             height: 80,
@@ -341,7 +341,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
             width: 10,
           ),
           Text(
-            '몸       무     게',
+            '몸       무       게',
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
@@ -387,13 +387,13 @@ class _SurveyScreenState extends State<SurveyScreen> {
         children: [
           //blueLogo,
           SizedBox(width: 10),
-          Text('체                형', style: smallStyle),
+          Text('체                  형', style: smallStyle),
           SizedBox(width: 20),
           Container(
             child: Row(
               children: [
                 Container(
-                  height: 200,
+                  height: 240,
                   width: 650,
                   child: ListView.builder(
                     itemCount: widget.userData['pet'] == '강아지'
@@ -401,26 +401,41 @@ class _SurveyScreenState extends State<SurveyScreen> {
                         : catBcsImg.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => InkWell(
-                      child: Container(
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 2,
-                              color: index == int.parse(widget.userData['bcs'])
-                                  ? colors[0]
-                                  : colors[1],
-                            ),
-                            borderRadius: BorderRadius.circular(20)),
-                        width: 200,
-                        height: 60,
-                        child: Center(
-                          child: Image.asset(
-                            widget.userData['pet'] == '강아지'
-                                ? dogBcsImg[index]
-                                : catBcsImg[index],
+                      child: Column(
+                        children: [
+                          Container(
                             width: 200,
+                            height: 200,
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 2,
+                                  color:
+                                      index == int.parse(widget.userData['bcs'])
+                                          ? colors[0]
+                                          : colors[1],
+                                ),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    widget.userData['pet'] == '강아지'
+                                        ? dogBcsImg[index]
+                                        : catBcsImg[index],
+                                    width: 180,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                          Text(
+                            bcsText[index],
+                            style: TextStyle(
+                                fontFamily: 'NanumBarunGothic',
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
                       ),
                       onTap: () {
                         setState(() {

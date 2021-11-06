@@ -34,38 +34,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: colors[0],
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.asset(
+                  'images/png/루이스홈 로고BLUE.png',
+                  width: MediaQuery.of(context).size.width * 0.5,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                selectPet(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                textFormName(),
+                textFormPhoneNumber(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                submitButton(),
+              ],
             ),
-            Image.asset(
-              'images/png/루이스홈 로고BLUE.png',
-              width: MediaQuery.of(context).size.width * 0.5,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            selectPet(),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
-            textFormName(),
-            textFormPhoneNumber(),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            submitButton(),
-          ],
+          ),
         ),
       ),
     );

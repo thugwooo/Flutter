@@ -9,13 +9,13 @@ final catBcsImg = [
   'images/bcs/cat_02.png',
   'images/bcs/cat_03.png'
 ];
+final bcsText = ['날씬해요', '적당해요', '통통해요'];
 final catHealth = [
   '뼈/관절',
   '피부/피모',
   '소화기',
   '다이어트',
-  '비뇨계/방광염 결석',
-  '신장',
+  '비뇨계, 방광염 결석',
   '심장/당뇨',
   '헤어볼',
   '기타'

@@ -82,19 +82,24 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Form(
         key: _formKey,
         child: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
-              ),
-              Image.asset(
-                'images/png/루이스홈 로고BLUE.png',
-                width: MediaQuery.of(context).size.width * 0.5,
-              ),
-              textFormName(),
-              textFormPhoneNumber(),
-              submitButton(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.asset(
+                  'images/png/루이스홈 로고BLUE.png',
+                  width: MediaQuery.of(context).size.width * 0.5,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                ),
+                textFormName(),
+                textFormPhoneNumber(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                submitButton(),
+              ],
+            ),
           ),
         ),
       ),
@@ -171,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget submitButton() {
     return ElevatedButton(
       child: Text(
-        '제출',
+        '다음',
         style: TextStyle(fontFamily: 'NanumBarunGothic'),
       ),
       style: ElevatedButton.styleFrom(primary: Colors.grey),

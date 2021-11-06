@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: MediaQuery.of(context).size.height * 0.17,
             ),
             Image.asset(
               'images/png/루이스홈 로고BLUE.png',

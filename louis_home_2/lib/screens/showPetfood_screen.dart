@@ -250,13 +250,19 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                         fontFamily: 'NanumBarunGothic',
                       ),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Text(
                       filteredPetfood[index]['name'].toString(),
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 19,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'NanumBarunGothic',
                       ),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Text(
                       filteredPetfood[index]['hash'].toString(),
