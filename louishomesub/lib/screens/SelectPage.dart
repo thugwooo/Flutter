@@ -80,8 +80,11 @@ class _SelectPageState extends State<SelectPage> {
                   child: Center(
                     child: Text(
                       itemName[index],
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'NanumBarunGothic',
+                      ),
                     ),
                   ),
                 ),
@@ -113,8 +116,11 @@ class _SelectPageState extends State<SelectPage> {
                   child: Center(
                     child: Text(
                       pet[index],
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'NanumBarunGothic',
+                      ),
                     ),
                   ),
                 ),
@@ -134,8 +140,8 @@ class _SelectPageState extends State<SelectPage> {
   Widget rightList() {
     return Container(
       margin: EdgeInsets.all(10),
-      height: MediaQuery.of(context).size.height * 0.72,
-      width: MediaQuery.of(context).size.width * 0.75,
+      height: MediaQuery.of(context).size.height * 0.73,
+      width: MediaQuery.of(context).size.width * 0.77,
       child: GridView.builder(
         itemCount: subData[selectedItemId][selectedPetId]
             .length, //여기에 selectedItemId 를 통해 구현해야함
@@ -178,13 +184,25 @@ class _SelectPageState extends State<SelectPage> {
                   height: 150,
                 ),
                 Text(
-                    subData[selectedItemId][selectedPetId][index]["brand"]
-                        .toString(),
-                    style: TextStyle(color: Colors.grey[700])),
+                  subData[selectedItemId][selectedPetId][index]["brand"]
+                      .toString(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[700],
+                    fontFamily: 'NanumBarunGothic',
+                  ),
+                ),
+                SizedBox(
+                  height: 3,
+                ),
                 Text(
                   subData[selectedItemId][selectedPetId][index]["name"]
                       .toString(),
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'NanumBarunGothic',
+                  ),
                 ),
                 SizedBox(
                   height: 5,
@@ -193,7 +211,11 @@ class _SelectPageState extends State<SelectPage> {
                   subData[selectedItemId][selectedPetId][index]["price"]
                           .toString() +
                       ' 원',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'NanumBarunGothic',
+                  ),
                 ),
               ],
             ),
@@ -220,6 +242,7 @@ class _SelectPageState extends State<SelectPage> {
                     height: MediaQuery.of(context).size.height * 0.7,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
                           width: 30,
@@ -227,8 +250,12 @@ class _SelectPageState extends State<SelectPage> {
                         Container(
                           width: MediaQuery.of(context).size.width * 0.25,
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                              ),
                               Container(
                                 height:
                                     MediaQuery.of(context).size.height * 0.2,
@@ -249,7 +276,8 @@ class _SelectPageState extends State<SelectPage> {
                                         ["brand"]
                                     .toString(),
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'NanumBarunGothic',
                                   color: Colors.grey[700],
                                 ),
                               ),
@@ -259,7 +287,8 @@ class _SelectPageState extends State<SelectPage> {
                                     .toString(),
                                 style: TextStyle(
                                   fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'NanumBarunGothic',
                                 ),
                               ),
                               SizedBox(
@@ -271,7 +300,8 @@ class _SelectPageState extends State<SelectPage> {
                                         .toString() +
                                     ' 원',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'NanumBarunGothic',
                                   fontSize: 18,
                                 ),
                               ),
@@ -303,35 +333,42 @@ class _SelectPageState extends State<SelectPage> {
   Widget makeShampoo(var index) {
     return SingleChildScrollView(
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.476,
+        width: MediaQuery.of(context).size.width * 0.49,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
               height: 10,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
             ),
             Row(
               children: [
                 Text(
                   "•  향",
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'NanumBarunGothic',
+                    fontSize: 18,
                   ),
                 ),
                 Text(
                   " 약 사용 형태    ",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'NanumBarunGothic',
                   ),
                 ),
                 Text(
                   subData[selectedItemId][selectedPetId][index]["scent"]
                       .toString(),
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
+                    fontFamily: 'NanumBarunGothic',
                   ),
                 ),
               ],
@@ -345,23 +382,26 @@ class _SelectPageState extends State<SelectPage> {
                   Text(
                     "•  향 강도",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'NanumBarunGothic',
+                      fontSize: 18,
                     ),
                   ),
                   Text(
                     "아 형태     ",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'NanumBarunGothic',
                     ),
                   ),
                   Text(
                     subData[selectedItemId][selectedPetId][index]["scentIn"]
                         .toString(),
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
+                      fontFamily: 'NanumBarunGothic',
                     ),
                   ),
                 ],
@@ -372,23 +412,26 @@ class _SelectPageState extends State<SelectPage> {
                   Text(
                     "•  린스 겸용",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'NanumBarunGothic',
+                      fontSize: 18,
                     ),
                   ),
                   Text(
                     " 형태     ",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'NanumBarunGothic',
                     ),
                   ),
                   Text(
                     subData[selectedItemId][selectedPetId][index]["rinse"]
                         .toString(),
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
+                      fontFamily: 'NanumBarunGothic',
                     ),
                   )
                 ],
@@ -399,15 +442,17 @@ class _SelectPageState extends State<SelectPage> {
                   Text(
                     "•  치약 사용 형태     ",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'NanumBarunGothic',
+                      fontSize: 18,
                     ),
                   ),
                   Text(
                     subData[selectedItemId][selectedPetId][index]["toothform"]
                         .toString(),
                     style: TextStyle(
-                      fontSize: 20,
+                      fontFamily: 'NanumBarunGothic',
+                      fontSize: 18,
                     ),
                   ),
                 ],
@@ -420,23 +465,26 @@ class _SelectPageState extends State<SelectPage> {
                   Text(
                     "•  추천 대상",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'NanumBarunGothic',
+                      fontSize: 18,
                     ),
                   ),
                   Text(
                     " 형태     ",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'NanumBarunGothic',
                     ),
                   ),
                   Text(
                     subData[selectedItemId][selectedPetId][index]["rec"]
                         .toString(),
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
+                      fontFamily: 'NanumBarunGothic',
                     ),
                     softWrap: true,
                   )
@@ -449,8 +497,9 @@ class _SelectPageState extends State<SelectPage> {
               subData[selectedItemId][selectedPetId][index]["hash"].toString(),
               style: TextStyle(
                 color: colors[0],
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'NanumBarunGothic',
+                fontSize: 18,
               ),
             ),
             SizedBox(
@@ -459,40 +508,51 @@ class _SelectPageState extends State<SelectPage> {
             Text(
               "•  전성분      ",
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'NanumBarunGothic',
+                fontSize: 18,
               ),
             ),
-            SizedBox(
-              height: 6,
-            ),
-            Text(
-                subData[selectedItemId][selectedPetId][index]["ingredient"]
-                    .toString(),
-                style: TextStyle(fontSize: 13),
-                softWrap: true),
-            SizedBox(height: 6),
-            if (subData[selectedItemId][selectedPetId][index]["cautionExp"]!
-                    .length >
-                1)
-              for (var i = 0;
-                  i <
-                      subData[selectedItemId][selectedPetId][index]
-                              ["cautionExp"]!
-                          .length;
-                  i++)
-                Column(
-                  children: [
-                    Text(
-                      subData[selectedItemId][selectedPetId][index]
-                              ["cautionExp"][i]
-                          .toString(),
-                      style: TextStyle(
-                        color: expColor[i % 3],
-                      ),
-                    ),
-                  ],
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 6,
                 ),
+                Text(
+                  subData[selectedItemId][selectedPetId][index]["ingredient"]
+                      .toString(),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontFamily: 'NanumBarunGothic',
+                  ),
+                  softWrap: true,
+                ),
+                SizedBox(height: 6),
+                if (subData[selectedItemId][selectedPetId][index]["cautionExp"]!
+                        .length >
+                    1)
+                  for (var i = 0;
+                      i <
+                          subData[selectedItemId][selectedPetId][index]
+                                  ["cautionExp"]!
+                              .length;
+                      i++)
+                    Column(
+                      children: [
+                        Text(
+                          subData[selectedItemId][selectedPetId][index]
+                                  ["cautionExp"][i]
+                              .toString(),
+                          style: TextStyle(
+                            color: expColor[i % 3],
+                            fontFamily: 'NanumBarunGothic',
+                          ),
+                        ),
+                      ],
+                    ),
+              ],
+            ),
           ],
         ),
       ),
