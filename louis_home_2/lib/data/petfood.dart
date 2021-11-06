@@ -582,7 +582,7 @@ final petfood = [
   {
     'pet': '강아지',
     'brand': '맥아담스',
-    'name': '방목치킨과 연어 소형',
+    'name': '방목 치킨과 연어 소형',
     'food_type': '건식',
     'volume': '2kg',
     'size': ['소형'],
@@ -610,7 +610,7 @@ final petfood = [
   {
     'pet': '강아지',
     'brand': '맥아담스',
-    'name': '방목치킨과 연어 중형',
+    'name': '방목 치킨과 연어 중형',
     'food_type': '건식',
     'volume': '2kg',
     'size': ['중형'],

@@ -237,9 +237,12 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                 child: Column(
                   children: [
                     Image.asset(
+                      'images/petfood/6피쉬 캣.png',
+/*
                       'images/petfood/' +
                           filteredPetfood[index]['name'].toString() +
                           '.png',
+*/
                       height: 180,
                     ),
                     Text(
