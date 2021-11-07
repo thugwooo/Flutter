@@ -25,6 +25,7 @@ class _SelectPageState extends State<SelectPage> {
       color: Colors.green[900],
       fontFamily: 'NanumBarunGothic',
       fontSize: 13,
+      fontWeight: FontWeight.w700,
     ),
     TextStyle(
       color: Colors.black,
@@ -527,7 +528,7 @@ class _SelectPageState extends State<SelectPage> {
               width: MediaQuery.of(context).size.width * 0.49,
               decoration: BoxDecoration(
                   border: Border.all(
-                    width: 2,
+                    width: 1,
                     color: index == selectedItemId ? colors[0] : colors[1],
                   ),
                   borderRadius: BorderRadius.circular(10)),
@@ -552,7 +553,7 @@ class _SelectPageState extends State<SelectPage> {
                   width: MediaQuery.of(context).size.width * 0.49,
                   decoration: BoxDecoration(
                       border: Border.all(
-                        width: 2,
+                        width: 1,
                         color: index == selectedItemId ? colors[0] : colors[1],
                       ),
                       borderRadius: BorderRadius.circular(10)),
@@ -567,32 +568,29 @@ class _SelectPageState extends State<SelectPage> {
                                   ["cautionExp"]!
                               .length;
                       i++)
-                    Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.49,
-                          child: Row(
-                            children: [
-                              if (i % 3 == 0)
-                                Text(
-                                  '※ ',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontFamily: 'NanumBarunGothic',
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              Text(
-                                subData[selectedItemId][selectedPetId][index]
-                                        ["cautionExp"][i]
-                                    .toString(),
-                                style: expColor[i % 3],
-                                softWrap: true,
+                    Container(
+                      child: Row(
+                        children: [
+                          if (i % 3 == 0)
+                            Text(
+                              '※ ',
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontFamily: 'NanumBarunGothic',
+                                fontSize: 13,
                               ),
-                            ],
+                            ),
+                          Flexible(
+                            child: Text(
+                              subData[selectedItemId][selectedPetId][index]
+                                      ["cautionExp"][i]
+                                  .toString(),
+                              style: expColor[i % 3],
+                              softWrap: true,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
               ],
             ),
