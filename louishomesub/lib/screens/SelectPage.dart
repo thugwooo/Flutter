@@ -20,7 +20,23 @@ class _SelectPageState extends State<SelectPage> {
   var selectedItemId = 0;
   var selectedPetId = 0;
   var subData;
-  var expColor = [Colors.red, Colors.black, Colors.black];
+  var expColor = [
+    TextStyle(
+      color: Colors.green[900],
+      fontFamily: 'NanumBarunGothic',
+      fontSize: 13,
+    ),
+    TextStyle(
+      color: Colors.black,
+      fontFamily: 'NanumBarunGothic',
+      fontSize: 13,
+    ),
+    TextStyle(
+      color: Colors.black,
+      fontFamily: 'NanumBarunGothic',
+      fontSize: 13,
+    ),
+  ];
   @override
   void initState() {
     super.initState();
@@ -81,7 +97,7 @@ class _SelectPageState extends State<SelectPage> {
                     child: Text(
                       itemName[index],
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w700,
                         fontFamily: 'NanumBarunGothic',
                       ),
@@ -107,8 +123,8 @@ class _SelectPageState extends State<SelectPage> {
                   margin: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      width: 2,
-                      color: index == selectedPetId ? Colors.red : colors[1],
+                      width: 3,
+                      color: index == selectedPetId ? colors[0] : colors[1],
                     ),
                   ),
                   width: 80,
@@ -286,7 +302,7 @@ class _SelectPageState extends State<SelectPage> {
                                         ["name"]
                                     .toString(),
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w700,
                                   fontFamily: 'NanumBarunGothic',
                                 ),
@@ -312,12 +328,6 @@ class _SelectPageState extends State<SelectPage> {
                           width: 10,
                         ),
                         makeShampoo(index)
-                        /*
-                        if (selectedItemId == 0) makeShampoo(index),
-                        if (0 < selectedItemId && selectedItemId < 4)
-                          makeEye(index),
-                        if (selectedItemId == 4) makeTooth(index),
-                        */
                       ],
                     ),
                   );
@@ -347,7 +357,7 @@ class _SelectPageState extends State<SelectPage> {
             Row(
               children: [
                 Text(
-                  "•  향",
+                  "   향",
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontFamily: 'NanumBarunGothic',
@@ -380,7 +390,7 @@ class _SelectPageState extends State<SelectPage> {
               Row(
                 children: [
                   Text(
-                    "•  향 강도",
+                    "   향 강도",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: 'NanumBarunGothic',
@@ -410,7 +420,7 @@ class _SelectPageState extends State<SelectPage> {
               Row(
                 children: [
                   Text(
-                    "•  린스 겸용",
+                    "   린스 겸용",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: 'NanumBarunGothic',
@@ -440,7 +450,7 @@ class _SelectPageState extends State<SelectPage> {
               Row(
                 children: [
                   Text(
-                    "•  치약 사용 형태     ",
+                    "   치약 사용 형태     ",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: 'NanumBarunGothic',
@@ -463,7 +473,7 @@ class _SelectPageState extends State<SelectPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "•  추천 대상",
+                    "   추천 대상",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: 'NanumBarunGothic',
@@ -506,12 +516,21 @@ class _SelectPageState extends State<SelectPage> {
               height: 30,
             ),
             Text(
-              "•  전성분      ",
+              "   전성분      ",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontFamily: 'NanumBarunGothic',
                 fontSize: 18,
               ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.49,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 2,
+                    color: index == selectedItemId ? colors[0] : colors[1],
+                  ),
+                  borderRadius: BorderRadius.circular(10)),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -529,6 +548,16 @@ class _SelectPageState extends State<SelectPage> {
                   softWrap: true,
                 ),
                 SizedBox(height: 6),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.49,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 2,
+                        color: index == selectedItemId ? colors[0] : colors[1],
+                      ),
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                SizedBox(height: 6),
                 if (subData[selectedItemId][selectedPetId][index]["cautionExp"]!
                         .length >
                     1)
@@ -540,13 +569,27 @@ class _SelectPageState extends State<SelectPage> {
                       i++)
                     Column(
                       children: [
-                        Text(
-                          subData[selectedItemId][selectedPetId][index]
-                                  ["cautionExp"][i]
-                              .toString(),
-                          style: TextStyle(
-                            color: expColor[i % 3],
-                            fontFamily: 'NanumBarunGothic',
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.49,
+                          child: Row(
+                            children: [
+                              if (i % 3 == 0)
+                                Text(
+                                  '※ ',
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontFamily: 'NanumBarunGothic',
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              Text(
+                                subData[selectedItemId][selectedPetId][index]
+                                        ["cautionExp"][i]
+                                    .toString(),
+                                style: expColor[i % 3],
+                                softWrap: true,
+                              ),
+                            ],
                           ),
                         ),
                       ],
