@@ -1425,7 +1425,7 @@ final petfood = [
   {
     'pet': '고양이',
     'brand': '티키펫',
-    'name': '벨벳무스 키튼 치킨&치킨닭간',
+    'name': '벨벳무스 키튼 치킨&닭간',
     'food_type': '습식',
     'volume': '80g',
     'size': ['무관'],
