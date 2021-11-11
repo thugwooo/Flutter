@@ -566,6 +566,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget hash() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           height: 8,
