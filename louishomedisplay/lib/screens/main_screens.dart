@@ -350,7 +350,12 @@ class _MainScreenState extends State<MainScreen> {
                               .toString(),
                           style: TextStyle(
                             fontFamily: font,
-                            fontSize: 15,
+                            fontSize: subData[selectedItemId][selectedPetId]
+                                            [index]["name"]
+                                        .length >
+                                    10
+                                ? 14
+                                : 15,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
