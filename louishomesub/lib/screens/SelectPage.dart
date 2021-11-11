@@ -11,10 +11,10 @@ class SelectPage extends StatefulWidget {
 class _SelectPageState extends State<SelectPage> {
   var itemName = [
     '샴푸',
+    '치약',
     '눈세정제',
     '귀세정제',
     '에센스/미스트',
-    '치약',
   ];
   var pet = ['강아지', '고양이'];
   var selectedItemId = 0;
