@@ -558,15 +558,23 @@ class _MainScreenState extends State<MainScreen> {
         SizedBox(
           height: 8,
         ),
-        Text(
-          subData[selectedItemId][selectedPetId][selectedItemNumber]["hash"]
-              .toString(),
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
-            color: colors[0],
+        for (var i = 0;
+            i <
+                subData[selectedItemId][selectedPetId][selectedItemNumber]
+                        ["hash"]
+                    .length;
+            i++)
+          Text(
+            '    ' +
+                subData[selectedItemId][selectedPetId][selectedItemNumber]
+                        ["hash"][i]
+                    .toString(),
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+              color: colors[0],
+            ),
           ),
-        ),
         SizedBox(
           height: 8,
         ),
@@ -582,21 +590,29 @@ class _MainScreenState extends State<MainScreen> {
           height: 8,
         ),
         Text(
-          '추천대상',
+          '   추천대상',
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 20,
           ),
         ),
         SizedBox(height: 8),
-        Text(
-          subData[selectedItemId][selectedPetId][selectedItemNumber]["rec"]
-              .toString(),
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
+        for (var i = 0;
+            i <
+                subData[selectedItemId][selectedPetId][selectedItemNumber]
+                        ["rec"]
+                    .length;
+            i++)
+          Text(
+            '    ' +
+                subData[selectedItemId][selectedPetId][selectedItemNumber]
+                        ["rec"][i]
+                    .toString(),
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+            ),
           ),
-        ),
         Divider(
           thickness: 1,
           color: colors[0],
@@ -607,6 +623,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget tooth() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
           '치약 사용 형태',
@@ -635,7 +652,7 @@ class _MainScreenState extends State<MainScreen> {
       children: [
         SizedBox(height: 8),
         Text(
-          '향',
+          '   향',
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 20,
@@ -643,8 +660,10 @@ class _MainScreenState extends State<MainScreen> {
         ),
         SizedBox(height: 8),
         Text(
-          subData[selectedItemId][selectedPetId][selectedItemNumber]["scent"]
-              .toString(),
+          '    ' +
+              subData[selectedItemId][selectedPetId][selectedItemNumber]
+                      ["scent"]
+                  .toString(),
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 15,
@@ -710,11 +729,15 @@ class _MainScreenState extends State<MainScreen> {
                 color: colors[0],
               ),
               SizedBox(height: 8),
-              Text(
-                subData[selectedItemId][selectedPetId][selectedItemNumber]
-                        ["ingredient"]
-                    .toString(),
-                softWrap: true,
+              Container(
+                margin: EdgeInsets.only(left: 11),
+                width: MediaQuery.of(context).size.width * 0.4,
+                child: Text(
+                  subData[selectedItemId][selectedPetId][selectedItemNumber]
+                          ["ingredient"]
+                      .toString(),
+                  softWrap: true,
+                ),
               ),
               SizedBox(height: 8),
               Divider(
@@ -736,7 +759,7 @@ class _MainScreenState extends State<MainScreen> {
                       children: [
                         if (i % 3 == 0)
                           Text(
-                            '※ ',
+                            '    ' + '※ ',
                             style: TextStyle(
                               color: Colors.green,
                               fontSize: 13,
@@ -744,9 +767,10 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         Flexible(
                           child: Text(
-                            subData[selectedItemId][selectedPetId]
-                                    [selectedItemNumber]["cautionExp"][i]
-                                .toString(),
+                            '    ' +
+                                subData[selectedItemId][selectedPetId]
+                                        [selectedItemNumber]["cautionExp"][i]
+                                    .toString(),
                             style: expColor[i % 3],
                             softWrap: true,
                           ),
