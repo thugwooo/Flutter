@@ -208,7 +208,7 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget petbuttons() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.05,
+      height: MediaQuery.of(context).size.height * 0.06,
       width: MediaQuery.of(context).size.width * 0.8,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -226,6 +226,7 @@ class _MainScreenState extends State<MainScreen> {
     return InkWell(
       child: Container(
         width: 200,
+        height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
@@ -315,10 +316,6 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ],
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.grey,
-                      ),
                     ),
                     child: Column(
                       children: [
@@ -331,7 +328,7 @@ class _MainScreenState extends State<MainScreen> {
                                         ["name"]
                                     .toString() +
                                 ".png",
-                            height: 150,
+                            height: 120,
                           ),
                         ),
                         SizedBox(
@@ -400,10 +397,20 @@ class _MainScreenState extends State<MainScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              width: 1,
-              color: Colors.grey,
-            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(2, 2),
+                blurRadius: 1,
+                spreadRadius: 1,
+              ),
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(-2, -2),
+                blurRadius: 1,
+                spreadRadius: 1,
+              ),
+            ],
           ),
           height: MediaQuery.of(context).size.height * 0.7,
           width: MediaQuery.of(context).size.width * 0.8,
