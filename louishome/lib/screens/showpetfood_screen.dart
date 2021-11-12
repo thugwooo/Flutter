@@ -68,6 +68,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
       petfood = filteringAge(petfood, gas);
       print('age' + petfood.length.toString());
     }
+    petfood = data;
   }
 
   dynamic calBirth() {
