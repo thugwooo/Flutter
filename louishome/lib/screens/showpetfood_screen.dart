@@ -68,7 +68,6 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
       petfood = filteringAge(petfood, gas);
       print('age' + petfood.length.toString());
     }
-    petfood = data;
   }
 
   dynamic calBirth() {
@@ -358,7 +357,8 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
                 Text(
                   petfood[index]['name'].toString(),
                   style: TextStyle(
-                    fontSize: 19,
+                    fontSize:
+                        petfood[index]['name'].toString().length > 11 ? 17 : 19,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
