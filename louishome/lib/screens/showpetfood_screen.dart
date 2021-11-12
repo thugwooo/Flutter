@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:louishome/data/breed.dart';
+import 'package:louishome/data/filtering.dart';
 import 'package:louishome/data/petfood.dart';
 import 'package:louishome/data/style.dart';
 
@@ -16,6 +18,9 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   var petfood;
   var dialogbool = false;
   var selectedpetfoodId;
+  var size;
+  var birthMonth;
+  var gas;
   var showpetfoodStyle = [
     TextStyle(
       fontSize: 20,
@@ -36,6 +41,96 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     expHealth = userData['health'].length > 0 ? true : false;
     print(expAlg);
     print(userData);
+    birthMonth = calBirth();
+    petfood = filteringPet(petfood, userData['pet']);
+    print('pet' + petfood.length.toString());
+    if (userData['alg'].length > 0) {
+      petfood = filteringAlg(petfood, userData['alg']);
+      print('alg' + petfood.length.toString());
+    }
+
+    petfood = filteringHealth(petfood, userData['health']);
+    if (int.parse(userData['bcs'].toString()) == 2) {
+      petfood = filteringBcs(petfood);
+      print('bcs' + petfood.length.toString());
+    }
+
+    if (userData['pet'] == '강아지') {
+      calSize();
+      calDogGAS();
+
+      petfood = filteringSize(petfood, size);
+      print('size' + petfood.length.toString());
+      filteringAge(petfood, gas);
+      print('age' + petfood.length.toString());
+    } else if (userData['pet' == '고양이']) {
+      calCatGAS();
+      petfood = filteringAge(petfood, gas);
+      print('age' + petfood.length.toString());
+    }
+  }
+
+  dynamic calBirth() {
+    var today = DateTime.now();
+    var birthDate;
+    var birth = DateTime.utc(
+      int.parse(userData['birthYear']),
+      int.parse(userData['birthMonth']),
+      int.parse(userData['birthDay']),
+    ).toString();
+    birthDate =
+        int.parse(today.difference(DateTime.parse(birth)).inDays.toString());
+    return birthDate ~/ 30;
+  }
+
+  void calDogGAS() {
+    if (size == '소형' || size == '중형') {
+      if (birthMonth < 12) {
+        gas = 'G';
+      } else if (birthMonth < 73) {
+        gas = 'A';
+      } else {
+        gas = 'S';
+      }
+    } else {
+      if (birthMonth < 16) {
+        gas = 'G';
+      } else if (birthMonth < 61) {
+        gas = 'A';
+      } else {
+        gas = 'S';
+      }
+    }
+  }
+
+  void calCatGAS() {
+    if (birthMonth < 4) {
+      gas = 'G';
+    } else if (birthMonth < 12) {
+      gas = 'G(3~)';
+    } else if (birthMonth < 73) {
+      gas = 'A';
+    } else {
+      gas = 'S';
+    }
+  }
+
+  void calSize() {
+    for (var i = 0; i < dogBreed.length; i++) {
+      if (dogBreed[i]['breed'] == widget.userData['breed']) {
+        size = dogBreed[i]['size'];
+
+        if (size == '대형견(초)' || size == '대형견') {
+          size = '대형';
+        }
+        if (size == '중형견') {
+          size = '중형';
+        }
+        if (size == '소형견(초)' || size == '소형견') {
+          size = '소형';
+        }
+      }
+    }
   }
 
   @override
@@ -142,7 +237,10 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
           Text(
             petfood[selectedpetfoodId]['name'].toString(),
             style: TextStyle(
-              fontSize: 19,
+              fontSize:
+                  petfood[selectedpetfoodId]['name'].toString().length > 11
+                      ? 17
+                      : 19,
               fontWeight: FontWeight.w700,
             ),
           ),
