@@ -30,6 +30,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
     userData = widget.userData;
     alg = userData['pet'] == '강아지' ? dogAlg : catAlg;
     health = userData['pet'] == '강아지' ? dogHealth : catHealth;
+
     print(userData);
   }
 

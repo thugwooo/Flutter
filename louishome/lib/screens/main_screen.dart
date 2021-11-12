@@ -246,7 +246,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         onTap: () {
           _formKey.currentState!.save();
-          userData['breed'] = selectedNum == 0 ? '그레이트 데인' : '데본렉스';
+          userData['breed'] = userData['pet'] == '강아지' ? '그레이트 데인' : '데본렉스';
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return SurveyScreen(
               userData: userData,

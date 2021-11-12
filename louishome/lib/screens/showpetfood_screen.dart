@@ -63,7 +63,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
       print('size' + petfood.length.toString());
       filteringAge(petfood, gas);
       print('age' + petfood.length.toString());
-    } else if (userData['pet' == '고양이']) {
+    } else if (userData['pet'] == '고양이') {
       calCatGAS();
       petfood = filteringAge(petfood, gas);
       print('age' + petfood.length.toString());
