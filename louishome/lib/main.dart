@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:louishome/components/screens/main_screen.dart';
+import 'package:louishome/data/style.dart';
+import 'package:louishome/screens/main_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,9 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Louis-Home',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: font,
       ),
-      home: CheckScreen(),
+      home: MainScreen(),
     );
   }
 }
