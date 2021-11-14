@@ -228,6 +228,7 @@ class _MainScreenState extends State<MainScreen> {
         width: 200,
         height: 60,
         decoration: BoxDecoration(
+          color: selectedPetList.contains(index) ? colors[0] : Colors.white,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -249,11 +250,14 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             Icon(
               Icons.check_circle,
-              color: selectedPetList.contains(index) ? colors[0] : colors[1],
+              color: selectedPetList.contains(index) ? Colors.white : colors[1],
             ),
             Text(
               "  " + pet[index].toString(),
               style: TextStyle(
+                color:
+                    selectedPetList.contains(index) ? Colors.white : colors[1],
+                fontWeight: selectedPetList.contains(index) ? bold[0] : bold[1],
                 fontFamily: font,
                 fontSize: 32,
               ),
