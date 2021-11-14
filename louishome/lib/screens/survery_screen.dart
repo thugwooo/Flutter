@@ -486,7 +486,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
             style: TextStyle(fontSize: 20),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.05,
+            width: MediaQuery.of(context).size.width * 0.07,
             height: MediaQuery.of(context).size.height * 0.04,
             child: DropdownButton(
               isExpanded: true,
@@ -515,7 +515,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
             style: TextStyle(fontSize: 20),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.05,
+            width: MediaQuery.of(context).size.width * 0.07,
             height: MediaQuery.of(context).size.height * 0.04,
             child: DropdownButton(
               isExpanded: true,

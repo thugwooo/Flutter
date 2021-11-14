@@ -39,17 +39,18 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     userData = widget.userData;
     expAlg = userData['alg'].length > 0 ? true : false;
     expHealth = userData['health'].length > 0 ? true : false;
-    print(expAlg);
+    print(userData['alg'].length.toString());
     print(userData);
     birthMonth = calBirth();
     petfood = filteringPet(petfood, userData['pet']);
     print('pet' + petfood.length.toString());
-    if (userData['alg'].length > 0) {
+    if (expAlg) {
       petfood = filteringAlg(petfood, userData['alg']);
       print('alg' + petfood.length.toString());
     }
-
-    petfood = filteringHealth(petfood, userData['health']);
+    if (expHealth) {
+      petfood = filteringHealth(petfood, userData['health']);
+    }
     if (int.parse(userData['bcs'].toString()) == 2) {
       petfood = filteringBcs(petfood);
       print('bcs' + petfood.length.toString());
@@ -61,8 +62,9 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
 
       petfood = filteringSize(petfood, size);
       print('size' + petfood.length.toString());
-      filteringAge(petfood, gas);
+      petfood = filteringAge(petfood, gas);
       print('age' + petfood.length.toString());
+      print(gas);
     } else if (userData['pet'] == '고양이') {
       calCatGAS();
       petfood = filteringAge(petfood, gas);

@@ -29,6 +29,8 @@ dynamic filteringAlg(var filteringData, var key) {
       }
     }
     if (flag) {
+      print(filteringData[i]['alg']);
+      print(filteringData[i]['name']);
       filteredData.add(filteringData[i]);
     }
   }
@@ -97,6 +99,8 @@ dynamic filteringAge(var filteringData, var key) {
       if (filteringData[i]['age'].contains(key) ||
           filteringData[i]['age'].contains('무관')) {
         filteredData.add(filteringData[i]);
+        print(key);
+        print(filteringData[i]['age']);
       }
     }
   }
