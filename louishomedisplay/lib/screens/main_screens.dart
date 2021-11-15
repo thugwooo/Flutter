@@ -271,11 +271,15 @@ class _MainScreenState extends State<MainScreen> {
             selectedPetList.contains(index)
                 ? selectedPetList.remove(index)
                 : selectedPetList.add(index);
+            print(selectedPetList);
             if (selectedPetList.length == 2 || selectedPetList.length == 0) {
               selectedPetId = 0;
             } else {
-              selectedPetId = index + 1;
-              print(selectedPetId);
+              if (selectedPetList.contains(0)) {
+                selectedPetId = 1;
+              } else {
+                selectedPetId = 2;
+              }
             }
           },
         );
