@@ -41,7 +41,16 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     expHealth = userData['health'].length > 0 ? true : false;
     print(userData['alg'].length.toString());
     print(userData);
+    if (int.parse(userData['bcs'].toString()) == 2 ||
+        userData['alg'].contains('다이어트')) {
+      petfood = filteringBcs(petfood);
+      print('bcs' + petfood.length.toString());
+      userData['health'].contains('다이어트')
+          ? userData['health'].remove('다이어트')
+          : null;
+    }
     birthMonth = calBirth();
+
     petfood = filteringPet(petfood, userData['pet']);
     print('pet' + petfood.length.toString());
     if (expAlg) {
@@ -50,10 +59,6 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     }
     if (expHealth) {
       petfood = filteringHealth(petfood, userData['health']);
-    }
-    if (int.parse(userData['bcs'].toString()) == 2) {
-      petfood = filteringBcs(petfood);
-      print('bcs' + petfood.length.toString());
     }
 
     if (userData['pet'] == '강아지') {
@@ -82,6 +87,8 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     ).toString();
     birthDate =
         int.parse(today.difference(DateTime.parse(birth)).inDays.toString());
+    print(birthDate);
+    print(birthDate ~/ 30);
     return birthDate ~/ 30;
   }
 
@@ -106,11 +113,11 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   }
 
   void calCatGAS() {
-    if (birthMonth < 4) {
+    if (birthMonth < 3) {
       gas = 'G';
-    } else if (birthMonth < 12) {
+    } else if (birthMonth <= 12) {
       gas = 'G(3~)';
-    } else if (birthMonth < 73) {
+    } else if (birthMonth <= 72) {
       gas = 'A';
     } else {
       gas = 'S';
