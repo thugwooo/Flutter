@@ -72,11 +72,7 @@ dynamic filteringHealth(var filteringData, var key) {
       }
     }
   }
-  for (var i = 0; i < filteredData.length; i++) {
-    print(filteredData[i]['name']);
-    print(filteredData[i]['cnt']);
-    print(filteredData[i]['cntS']);
-  }
+
   return filteredData;
 }
 

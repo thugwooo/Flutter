@@ -21,6 +21,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   var size;
   var birthMonth;
   var gas;
+  var subData;
   var showpetfoodStyle = [
     TextStyle(
       fontSize: 20,
@@ -37,30 +38,35 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     super.initState();
     petfood = data;
     userData = widget.userData;
+
     expAlg = userData['alg'].length > 0 ? true : false;
     expHealth = userData['health'].length > 0 ? true : false;
-    print(userData['alg'].length.toString());
-    print(userData);
+
     if (int.parse(userData['bcs'].toString()) == 2 ||
-        userData['alg'].contains('다이어트')) {
+        userData['health'].contains('다이어트')) {
       petfood = filteringBcs(petfood);
       print('bcs' + petfood.length.toString());
       userData['health'].contains('다이어트')
           ? userData['health'].remove('다이어트')
           : null;
     }
+    print(userData['health'].contains('다이어트'));
     birthMonth = calBirth();
 
     petfood = filteringPet(petfood, userData['pet']);
     print('pet' + petfood.length.toString());
+
     if (expAlg) {
       petfood = filteringAlg(petfood, userData['alg']);
       print('alg' + petfood.length.toString());
     }
-    if (expHealth) {
+    if (userData['health'].length > 0) {
       petfood = filteringHealth(petfood, userData['health']);
+      print('health' + petfood.length.toString());
     }
-
+    if (expHealth) {
+      userData['health'].add('다이어트');
+    }
     if (userData['pet'] == '강아지') {
       calSize();
       calDogGAS();
@@ -69,7 +75,6 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
       print('size' + petfood.length.toString());
       petfood = filteringAge(petfood, gas);
       print('age' + petfood.length.toString());
-      print(gas);
     } else if (userData['pet'] == '고양이') {
       calCatGAS();
       petfood = filteringAge(petfood, gas);
@@ -87,8 +92,7 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     ).toString();
     birthDate =
         int.parse(today.difference(DateTime.parse(birth)).inDays.toString());
-    print(birthDate);
-    print(birthDate ~/ 30);
+
     return birthDate ~/ 30;
   }
 
