@@ -22,16 +22,23 @@ dynamic filteringBcs(var filteringData) {
 
 dynamic filteringAlg(var filteringData, var key) {
   var filteredData = [];
-
-  for (var i = 0; i < filteringData.length; i++) {
-    var flag = true;
-    for (var j = 0; j < key.length; j++) {
-      if (filteringData[i]['alg'].contains(key[j])) {
-        flag = false;
+  if (key.contains('잘 모르겠어요')) {
+    for (var i = 0; i < filteringData.length; i++) {
+      if (filteringData[i]['sprotein'] == '1') {
+        filteredData.add(filteringData[i]);
       }
     }
-    if (flag) {
-      filteredData.add(filteringData[i]);
+  } else {
+    for (var i = 0; i < filteringData.length; i++) {
+      var flag = true;
+      for (var j = 0; j < key.length; j++) {
+        if (filteringData[i]['alg'].contains(key[j])) {
+          flag = false;
+        }
+      }
+      if (flag) {
+        filteredData.add(filteringData[i]);
+      }
     }
   }
   return filteredData;
@@ -40,6 +47,9 @@ dynamic filteringAlg(var filteringData, var key) {
 dynamic filteringHealth(var filteringData, var key) {
   var filteredData = [];
 
+  if (key.length == 1 && key.contains('다이어트')) {
+    return filteringData;
+  }
   for (var i = 0; i < filteringData.length; i++) {
     filteringData[i]['cnt'] = 0;
     filteringData[i]['cntS'] = 0;
@@ -108,5 +118,7 @@ dynamic filteringAge(var filteringData, var key) {
       }
     }
   }
+
+  filteredData.sort((a, b) => (a['age'].length).compareTo(b['age'].length));
   return filteredData;
 }
