@@ -54,20 +54,24 @@ dynamic filteringHealth(var filteringData, var key) {
     filteringData[i]['cnt'] = 0;
     filteringData[i]['cntS'] = 0;
   }
-  for (var i = 0; i < filteringData.length; i++) {
-    for (var j = 0; j < key.length; j++) {
-      if (filteringData[i]['health'].contains(key[j] + '(S)')) {
-        filteringData[i]['cnt'] += 1;
-        filteringData[i]['cntS'] += 1;
-      }
-      if (filteringData[i]['health'].contains(key[j])) {
-        filteringData[i]['cnt'] += 1;
+  if (key.contains('다이어트') == false) {
+    for (var i = 0; i < filteringData.length; i++) {
+      for (var j = 0; j < key.length; j++) {
+        if (filteringData[i]['health'].contains(key[j] + '(S)') &&
+            filteringData[i]['diet'] == 0) {
+          filteringData[i]['cnt'] += 1;
+          filteringData[i]['cntS'] += 1;
+        }
+        if (filteringData[i]['health'].contains(key[j]) &&
+            filteringData[i]['diet'] == 0) {
+          filteringData[i]['cnt'] += 1;
+        }
       }
     }
-  }
-  for (var i = 0; i < filteringData.length; i++) {
-    if (filteringData[i]['cnt'] > 0) {
-      filteredData.add(filteringData[i]);
+    for (var i = 0; i < filteringData.length; i++) {
+      if (filteringData[i]['cnt'] > 0) {
+        filteredData.add(filteringData[i]);
+      }
     }
   }
   filteredData.sort((a, b) => ((b['cnt']).compareTo(a['cnt'])));
@@ -119,6 +123,5 @@ dynamic filteringAge(var filteringData, var key) {
     }
   }
 
-  filteredData.sort((a, b) => (a['age'].length).compareTo(b['age'].length));
   return filteredData;
 }

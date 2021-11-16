@@ -43,26 +43,10 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     expHealth = userData['health'].length > 0 ? true : false;
     petfood = filteringPet(petfood, userData['pet']);
     print('pet' + petfood.length.toString());
-
-    if (int.parse(userData['bcs'].toString()) == 2 ||
-        userData['health'].contains('다이어트')) {
-      petfood = filteringBcs(petfood);
-      print('bcs' + petfood.length.toString());
-    }
-
     birthMonth = calBirth();
-
-    if (expAlg) {
-      petfood = filteringAlg(petfood, userData['alg']);
-      print('alg' + petfood.length.toString());
-    }
-    if (userData['health'].length > 0) {
-      petfood = filteringHealth(petfood, userData['health']);
-      print('health' + petfood.length.toString());
-    }
-
     if (userData['pet'] == '강아지') {
       calSize();
+
       calDogGAS();
 
       petfood = filteringSize(petfood, size);
@@ -73,6 +57,20 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
       calCatGAS();
       petfood = filteringAge(petfood, gas);
       print('age' + petfood.length.toString());
+    }
+    if (int.parse(userData['bcs'].toString()) == 2 ||
+        userData['health'].contains('다이어트')) {
+      petfood = filteringBcs(petfood);
+      print('bcs' + petfood.length.toString());
+    }
+
+    if (expAlg) {
+      petfood = filteringAlg(petfood, userData['alg']);
+      print('alg' + petfood.length.toString());
+    }
+    if (userData['health'].length > 0) {
+      petfood = filteringHealth(petfood, userData['health']);
+      print('health' + petfood.length.toString());
     }
   }
 
