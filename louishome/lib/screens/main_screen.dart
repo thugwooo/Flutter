@@ -45,9 +45,8 @@ class _MainScreenState extends State<MainScreen> {
         data = jsonDecode(utf8.decode(response.bodyBytes));
         if (data == 'info doesnot exist error') {
           newFlag = false;
-        } else if (data['pet'] == userData['pet'] &&
-            data['phoneNumber'] == userData['phoneNumber']) {
-          newFlag == true;
+        } else {
+          newFlag = true;
         }
       } else {
         print('falied');
@@ -331,6 +330,8 @@ class _MainScreenState extends State<MainScreen> {
   dynamic search() {
     print(selectedNum);
     if (selectedNum == 0) {
+      print(newFlag);
+
       if (newFlag) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('등록된 회원입니다.'),
@@ -356,7 +357,6 @@ class _MainScreenState extends State<MainScreen> {
         }));
       }
     } else if (selectedNum == 1) {
-      print(nextFlag);
       if (nextFlag) {
         print(userData);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
