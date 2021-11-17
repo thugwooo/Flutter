@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:louishome/data/data.dart';
 import 'package:louishome/data/style.dart';
+import 'package:louishome/data/surveyData.dart';
 import 'package:louishome/screens/survery_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,10 +18,82 @@ class _MainScreenState extends State<MainScreen> {
   var selectedNum = 0;
   var selectedPetId = 0;
   var userData;
+  var nextFlag = true;
+  var newFlag = true;
   @override
   void initState() {
     super.initState();
     userData = userInfo;
+  }
+
+  Future<dynamic> postUserData(url) async {
+    var url2 = Uri.parse(url);
+    var data;
+    var tmpAlg;
+    var tmpHealth;
+    var algList = [];
+    var healthList = [];
+    Response response = await post(
+      url2,
+      body: {
+        'name': userData['name'],
+        'phoneNumber': userData['phoneNumber'],
+      },
+    );
+    if (selectedNum == 0) {
+      if (response.statusCode == 200) {
+        data = jsonDecode(utf8.decode(response.bodyBytes));
+        if (data == 'info doesnot exist error') {
+          newFlag = false;
+        } else if (data['pet'] == userData['pet'] &&
+            data['phoneNumber'] == userData['phoneNumber']) {
+          newFlag == true;
+        }
+      } else {
+        print('falied');
+      }
+    } else {
+      if (response.statusCode == 200) {
+        data = jsonDecode(utf8.decode(response.bodyBytes));
+
+        nextFlag = data != 'info doesnot exist error';
+        if (nextFlag) {
+          userData['name'] = data['name'];
+          userData['phoneNumber'] = data['phoneNumber'];
+          userData['pet'] = data['pet'];
+          userData['breed'] = data['breed'];
+          userData['birthYear'] = data['birthYear'];
+          userData['birthMonth'] = data['birthMonth'];
+          userData['birthDay'] = data['birthDay'];
+          userData['sex'] = data['sex'];
+          userData['neu'] = data['neu'];
+          userData['bcs'] = data['bcs'];
+          userData['weight'] = data['weight'];
+          userData['petfood'] = data['petfood'].split(',');
+
+          tmpAlg = userData['pet'] == '강아지' ? dogAlg : catAlg;
+          tmpHealth = userData['pet'] == '강아지' ? dogHealth : catHealth;
+
+          for (var i = 0; i < tmpAlg.length; i++) {
+            if (data['alg'].contains(tmpAlg[i])) {
+              algList.add(tmpAlg[i]);
+            }
+          }
+          userData['alg'] = algList;
+          for (var i = 0; i < tmpHealth.length; i++) {
+            if (data['health'].contains(tmpHealth[i])) {
+              healthList.add(tmpHealth[i]);
+            }
+          }
+          userData['health'] = healthList;
+          print('finish save');
+          print(userData);
+        }
+      } else {
+        print('falied');
+        nextFlag = false;
+      }
+    }
   }
 
   @override
@@ -247,11 +323,53 @@ class _MainScreenState extends State<MainScreen> {
         onTap: () {
           _formKey.currentState!.save();
           userData['breed'] = userData['pet'] == '강아지' ? '그레이트 데인' : '데본렉스';
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return SurveyScreen(
-              userData: userData,
-            );
-          }));
+          postUserData('http://3.22.236.33:8000/app1/login/')
+              .then((value) => search());
         });
+  }
+
+  dynamic search() {
+    print(selectedNum);
+    if (selectedNum == 0) {
+      if (newFlag) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('등록된 회원입니다.'),
+        ));
+      } else {
+        userData['pet'] = pet[selectedPetId];
+        userData['breed'] = userData['pet'] == '강아지' ? '그레이트 데인' : '데본렉스';
+        userData['birthYear'] = '2021';
+        userData['birthMonth'] = '1';
+        userData['birthDay'] = '1';
+        userData['sex'] = 0;
+        userData['neu'] = 0;
+        userData['weight'] = 0;
+        userData['bcs'] = 0;
+        userData['alg'] = [];
+        userData['health'] = [];
+        userData['petfood'] = [];
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SurveyScreen(
+            userData: userData,
+          );
+        }));
+      }
+    } else if (selectedNum == 1) {
+      print(nextFlag);
+      if (nextFlag) {
+        print(userData);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SurveyScreen(
+            userData: userData,
+          );
+        }));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('회원 정보가 잘못되었습니다.'),
+        ));
+      }
+    }
+    return 'a';
   }
 }

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:louishome/data/breed.dart';
 import 'package:louishome/data/style.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -24,14 +27,49 @@ class _SurveyScreenState extends State<SurveyScreen> {
   var healthList = [];
   var alg;
   var health;
+  var data;
+  var dataFlag = false;
+  Future<dynamic> getPetfood(url) async {
+    var url2 = Uri.parse(url);
+
+    Response response = await post(
+      url2,
+      body: {
+        'pet': userData['pet'],
+        'breed': userData['breed'],
+        'bcs': userData['bcs'].toString(),
+        'birthYear': userData['birthYear'],
+        'birthMonth': userData['birthMonth'],
+        'birthDay': userData['birthDay'],
+        'alg': userData['alg'].toString(),
+        'health': userData['health'].toString(),
+      },
+    );
+    if (response.statusCode == 200) {
+      dataFlag = true;
+      print('survey page성공');
+      data = jsonDecode(utf8.decode(response.bodyBytes)).split(',');
+      data.removeAt(0);
+      print(data);
+    } else {
+      dataFlag = false;
+      print('실패');
+    }
+  }
+
   @override
   void initState() {
     super.initState;
     userData = widget.userData;
+    print(userData);
     alg = userData['pet'] == '강아지' ? dogAlg : catAlg;
     health = userData['pet'] == '강아지' ? dogHealth : catHealth;
-
-    print(userData);
+    selectedSexId = userData['sex'];
+    selectedNeuId = userData['neu'];
+    selectedBcsId = userData['bcs'];
+    selectedAlgYnId = userData['alg'].length > 0 ? 0 : 1;
+    algList = userData['alg'];
+    healthList = userData['health'];
   }
 
   @override
@@ -629,11 +667,20 @@ class _SurveyScreenState extends State<SurveyScreen> {
           _formKey.currentState!.save();
           userData['alg'] = algList;
           userData['health'] = healthList;
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return ShowPetfoodScreen(
-              userData: userData,
-            );
-          }));
+          getPetfood('http://3.22.236.33:8000/app1/filter/').then((value) {
+            if (dataFlag) {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ShowPetfoodScreen(
+                  userData: userData,
+                  petfoodName: data,
+                );
+              }));
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('서버 접속에 실패하였습니다.'),
+              ));
+            }
+          });
         });
   }
 }

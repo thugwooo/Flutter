@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:louishome/data/breed.dart';
-import 'package:louishome/data/filtering.dart';
+import 'package:http/http.dart';
+
 import 'package:louishome/data/petfood.dart';
 import 'package:louishome/data/style.dart';
 
 class ShowPetfoodScreen extends StatefulWidget {
   var userData;
-  ShowPetfoodScreen({this.userData});
+  var petfoodName;
+  ShowPetfoodScreen({this.userData, this.petfoodName});
   @override
   _ShowPetfoodScreenState createState() => _ShowPetfoodScreenState();
 }
@@ -15,13 +16,14 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
   var userData;
   var expAlg;
   var expHealth;
-  var petfood;
+  var petfood = [];
   var dialogbool = false;
   var selectedpetfoodId;
   var size;
   var birthMonth;
   var gas;
   var subData;
+
   var showpetfoodStyle = [
     TextStyle(
       fontSize: 20,
@@ -33,109 +35,56 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
     ),
     TextStyle(fontSize: 5),
   ];
+  Future<dynamic> postUserData(url) async {
+    var url2 = Uri.parse(url);
+    Response response = await post(
+      url2,
+      body: {
+        'name': userData['name'].toString(),
+        'phoneNumber': userData['phoneNumber'].toString(),
+        'pet': userData['pet'].toString(),
+        'breed': userData['breed'].toString(),
+        'birthYear': userData['birthYear'].toString(),
+        'birthMonth': userData['birthMonth'].toString(),
+        'birthDay': userData['birthDay'].toString(),
+        'sex': userData['sex'].toString(),
+        'neu': userData['neu'].toString(),
+        'weight': userData['weight'],
+        'bcs': userData['bcs'].toString(),
+        'alg': userData['alg'].toString(),
+        'health': userData['health'].toString(),
+        'petfood': petfood[selectedpetfoodId]['name'].toString(),
+      },
+    );
+    if (response.statusCode == 200) {
+      print('petfood page성공');
+    } else {
+      print('실패');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    petfood = data;
+    print(data.length);
     userData = widget.userData;
-
-    expAlg = userData['alg'].length > 0 ? true : false;
+    print(userData);
+    for (var i = 0; i < widget.petfoodName.length; i++) {
+      for (var j = 0; j < data.length; j++) {
+        if (widget.petfoodName[i] == data[j]['name']) {
+          petfood.add(data[j]);
+        }
+      }
+    }
+    if (userData['alg'].contains('잘 모르겠어요')) {
+      expAlg = 0;
+    } else if (!userData['alg'].contains('잘 모르겠어요') &&
+        userData['alg'].length > 0) {
+      expAlg = 1;
+    } else {
+      expAlg = 2;
+    }
     expHealth = userData['health'].length > 0 ? true : false;
-    petfood = filteringPet(petfood, userData['pet']);
-    print('pet' + petfood.length.toString());
-    birthMonth = calBirth();
-    if (userData['pet'] == '강아지') {
-      calSize();
-
-      calDogGAS();
-
-      petfood = filteringSize(petfood, size);
-      print('size' + petfood.length.toString());
-      petfood = filteringAge(petfood, gas);
-      print('age' + petfood.length.toString());
-    } else if (userData['pet'] == '고양이') {
-      calCatGAS();
-      petfood = filteringAge(petfood, gas);
-      print('age' + petfood.length.toString());
-    }
-    if (int.parse(userData['bcs'].toString()) == 2 ||
-        userData['health'].contains('다이어트')) {
-      petfood = filteringBcs(petfood);
-      print('bcs' + petfood.length.toString());
-    }
-
-    if (expAlg) {
-      petfood = filteringAlg(petfood, userData['alg']);
-      print('alg' + petfood.length.toString());
-    }
-    if (userData['health'].length > 0) {
-      petfood = filteringHealth(petfood, userData['health']);
-      print('health' + petfood.length.toString());
-    }
-  }
-
-  dynamic calBirth() {
-    var today = DateTime.now();
-    var birthDate;
-    var birth = DateTime.utc(
-      int.parse(userData['birthYear']),
-      int.parse(userData['birthMonth']),
-      int.parse(userData['birthDay']),
-    ).toString();
-    birthDate =
-        int.parse(today.difference(DateTime.parse(birth)).inDays.toString());
-
-    return birthDate ~/ 30;
-  }
-
-  void calDogGAS() {
-    if (size == '소형' || size == '중형') {
-      if (birthMonth < 12) {
-        gas = 'G';
-      } else if (birthMonth < 73) {
-        gas = 'A';
-      } else {
-        gas = 'S';
-      }
-    } else {
-      if (birthMonth < 16) {
-        gas = 'G';
-      } else if (birthMonth < 61) {
-        gas = 'A';
-      } else {
-        gas = 'S';
-      }
-    }
-  }
-
-  void calCatGAS() {
-    if (birthMonth < 3) {
-      gas = 'G';
-    } else if (birthMonth <= 12) {
-      gas = 'G(3~)';
-    } else if (birthMonth <= 72) {
-      gas = 'A';
-    } else {
-      gas = 'S';
-    }
-  }
-
-  void calSize() {
-    for (var i = 0; i < dogBreed.length; i++) {
-      if (dogBreed[i]['breed'] == widget.userData['breed']) {
-        size = dogBreed[i]['size'];
-
-        if (size == '대형견(초)' || size == '대형견') {
-          size = '대형';
-        }
-        if (size == '중형견') {
-          size = '중형';
-        }
-        if (size == '소형견(초)' || size == '소형견') {
-          size = '소형';
-        }
-      }
-    }
   }
 
   @override
@@ -198,8 +147,8 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
           ),
         ),
         Positioned(
-          bottom: 0,
-          width: MediaQuery.of(context).size.width * 0.8,
+          top: 0,
+          right: 0,
           child: InkWell(
             child: Icon(
               Icons.cancel,
@@ -211,7 +160,62 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
               });
             },
           ),
-        )
+        ),
+        Positioned(
+          bottom: 40,
+          right: MediaQuery.of(context).size.width * 0.35,
+          child: InkWell(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: colors[0],
+                ),
+                height: 50,
+                width: 100,
+                child: Center(
+                  child: Text(
+                    'SAVE',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: bold[0],
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () {
+                setState(() {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      content: Text(
+                        '저장하시겠습니까?',
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            postUserData(
+                                'http://3.22.236.33:8000/app1/sign-in/');
+                          },
+                          child: Text(
+                            '확인',
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            '취소',
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                });
+                //여기에 저장 버튼 넣기
+              }),
+        ),
       ],
     );
   }
@@ -412,8 +416,14 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          if (expAlg == 0)
+            Text(
+              '알레르기를 잘 모르고',
+              style: surveyBig,
+              softWrap: true,
+            ),
           Text(
-            expAlg == true
+            expAlg == 1
                 ? userData['alg'].toString() + '에 알레르기가 있고'
                 : '알레르기가 없고',
             style: surveyBig,
