@@ -530,7 +530,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget rightupDialog() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.4,
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height * 0.44,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -634,6 +634,48 @@ class _MainScreenState extends State<MainScreen> {
               fontSize: 15,
             ),
           ),
+        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
+                    ["productExp"]
+                .toString()
+                .length >
+            5)
+          SizedBox(height: 8),
+        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
+                    ["productExp"]
+                .toString()
+                .length >
+            5)
+          Text(
+            '   제품 설명',
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 20,
+            ),
+          ),
+        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
+                    ["productExp"]
+                .toString()
+                .length >
+            5)
+          SizedBox(height: 8),
+        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
+                    ["productExp"]
+                .toString()
+                .length >
+            5)
+          Container(
+            margin: EdgeInsets.only(left: 12),
+            width: MediaQuery.of(context).size.width * 0.4,
+            child: Text(
+              subData[selectedItemId][selectedPetId][selectedItemNumber]
+                      ["productExp"]
+                  .toString(),
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 15,
+              ),
+            ),
+          ),
         Divider(
           thickness: 1,
           color: colors[0],
@@ -731,7 +773,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget rightdownDialog() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.4,
-      height: MediaQuery.of(context).size.height * 0.24,
+      height: MediaQuery.of(context).size.height * 0.16,
       child: ListView(
         children: [
           Column(
