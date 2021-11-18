@@ -163,14 +163,14 @@ class _ShowPetfoodScreenState extends State<ShowPetfoodScreen> {
         ),
         Positioned(
           bottom: 0,
-          right: MediaQuery.of(context).size.width * 0.35,
+          left: MediaQuery.of(context).size.width * 0.12,
           child: InkWell(
               child: Container(
                 decoration: BoxDecoration(
                   color: colors[0],
                 ),
-                height: 50,
-                width: 100,
+                height: 40,
+                width: 80,
                 child: Center(
                   child: Text(
                     'SAVE',
