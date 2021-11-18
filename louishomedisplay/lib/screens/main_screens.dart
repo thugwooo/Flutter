@@ -521,7 +521,7 @@ class _MainScreenState extends State<MainScreen> {
       child: Column(
         children: [
           rightupDialog(),
-          rightdownDialog(),
+          Expanded(child: rightdownDialog()),
         ],
       ),
     );
@@ -549,26 +549,40 @@ class _MainScreenState extends State<MainScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              scent(),
+              Container(
+                  width: MediaQuery.of(context).size.width * 0.16,
+                  child: scent()),
               if (selectedItemId == 0 &&
                   subData[selectedItemId][selectedPetId][selectedItemNumber]
                               ["rinse"]
                           .length >
                       2)
-                rinse(),
-              if (selectedItemId == 0) scentIn(),
-              if (selectedItemId == 1) tooth(),
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    child: rinse()),
+              if (selectedItemId == 0)
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.13,
+                    child: scentIn()),
+              if (selectedItemId == 1)
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.13,
+                    child: tooth()),
             ],
           ),
           Divider(
             thickness: 1,
             color: colors[0],
           ),
-          rec(),
+          if (subData[selectedItemId][selectedPetId][selectedItemNumber]["rec"]
+                  .toString()
+                  .length >
+              5)
+            rec(),
           if (subData[selectedItemId][selectedPetId][selectedItemNumber]
                       ['productExp']
                   .length >
-              5)
+              3)
             proExp(),
           hash(),
         ],
