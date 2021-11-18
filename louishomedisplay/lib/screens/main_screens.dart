@@ -530,7 +530,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget rightupDialog() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.4,
-      height: MediaQuery.of(context).size.height * 0.44,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -566,6 +565,11 @@ class _MainScreenState extends State<MainScreen> {
             color: colors[0],
           ),
           rec(),
+          if (subData[selectedItemId][selectedPetId][selectedItemNumber]
+                      ['productExp']
+                  .length >
+              5)
+            proExp(),
           hash(),
         ],
       ),
@@ -576,9 +580,6 @@ class _MainScreenState extends State<MainScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 8,
-        ),
         for (var i = 0;
             i <
                 subData[selectedItemId][selectedPetId][selectedItemNumber]
@@ -634,48 +635,39 @@ class _MainScreenState extends State<MainScreen> {
               fontSize: 15,
             ),
           ),
-        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
+        Divider(
+          thickness: 1,
+          color: colors[0],
+        ),
+      ],
+    );
+  }
+
+  Widget proExp() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '   제품설명',
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 20,
+          ),
+        ),
+        SizedBox(height: 8),
+        Container(
+          margin: EdgeInsets.only(left: 13),
+          width: MediaQuery.of(context).size.width * 0.4,
+          child: Text(
+            subData[selectedItemId][selectedPetId][selectedItemNumber]
                     ["productExp"]
-                .toString()
-                .length >
-            5)
-          SizedBox(height: 8),
-        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
-                    ["productExp"]
-                .toString()
-                .length >
-            5)
-          Text(
-            '   제품 설명',
+                .toString(),
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: 20,
+              fontSize: 15,
             ),
           ),
-        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
-                    ["productExp"]
-                .toString()
-                .length >
-            5)
-          SizedBox(height: 8),
-        if (subData[selectedItemId][selectedPetId][selectedItemNumber]
-                    ["productExp"]
-                .toString()
-                .length >
-            5)
-          Container(
-            margin: EdgeInsets.only(left: 12),
-            width: MediaQuery.of(context).size.width * 0.4,
-            child: Text(
-              subData[selectedItemId][selectedPetId][selectedItemNumber]
-                      ["productExp"]
-                  .toString(),
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 15,
-              ),
-            ),
-          ),
+        ),
         Divider(
           thickness: 1,
           color: colors[0],
