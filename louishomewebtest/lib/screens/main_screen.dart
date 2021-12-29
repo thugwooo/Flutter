@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:louishomewebtest/data/controller.dart';
 import 'package:louishomewebtest/data/style.dart';
+import 'package:louishomewebtest/screens/info_screen.dart';
 import 'package:louishomewebtest/screens/subscription_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
                   index: c.selectedIndex.value,
                   children: [
                     subscriptionScreen(),
-                    Container(),
+                    infoScreen(),
                   ],
                 ),
               ],
