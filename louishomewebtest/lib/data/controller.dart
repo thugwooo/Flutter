@@ -14,7 +14,8 @@ class userDataController extends GetxController {
   RxInt periodWeek = 0.obs;
   RxString petfood = '선택된 사료 없음'.obs;
   RxString address = ''.obs;
-
+  RxString credit = ''.obs;
+  RxString registerDate = ''.obs;
   setUserName(value) {
     userName.value = value;
   }

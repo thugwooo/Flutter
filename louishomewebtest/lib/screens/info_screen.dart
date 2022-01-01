@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:louishomewebtest/data/controller.dart';
 import 'package:louishomewebtest/data/style.dart';
 
@@ -12,6 +13,7 @@ class _infoScreenState extends State<infoScreen> {
   infoController infoData = Get.put(infoController());
   bool infoFlag = false;
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -153,8 +155,12 @@ class _infoScreenState extends State<infoScreen> {
         ),
         child: Column(
           children: [
+            Text(
+              '회원정보',
+              style: infosmallStyle,
+            ),
             Container(
-              width: context.width * 0.2,
+              width: context.width * 0.3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -164,7 +170,7 @@ class _infoScreenState extends State<infoScreen> {
               ),
             ),
             Container(
-              width: context.width * 0.2,
+              width: context.width * 0.3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -174,7 +180,17 @@ class _infoScreenState extends State<infoScreen> {
               ),
             ),
             Container(
-              width: context.width * 0.2,
+              width: context.width * 0.3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('주소'),
+                  Text(infoData.userList[selectedIndex]['address']),
+                ],
+              ),
+            ),
+            Container(
+              width: context.width * 0.3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -184,22 +200,76 @@ class _infoScreenState extends State<infoScreen> {
               ),
             ),
             Container(
-              width: context.width * 0.2,
+              width: context.width * 0.3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('배송 기간'),
-                  Text(infoData.userList[selectedIndex]['date'].toString()),
+                  Text('배송까지 남은 기간(일)'),
+                  Text(infoData.userList[selectedIndex]['date'].toString() +
+                      '일'),
                 ],
               ),
             ),
             Container(
-              width: context.width * 0.2,
+              width: context.width * 0.3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('구독 신청 날짜'),
+                  Text(infoData.userList[selectedIndex]['registerDate']
+                      .toString()),
+                ],
+              ),
+            ),
+            Container(
+              width: context.width * 0.3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('다음 배송 날짜'),
+                  Text(infoData.userList[selectedIndex]['registerDate']),
+                ],
+              ),
+            ),
+            Container(
+              width: context.width * 0.3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('구독 기간'),
+                  Text(infoData.userList[selectedIndex]['periodWeek']
+                          .toString() +
+                      '주'),
+                ],
+              ),
+            ),
+            Container(
+              width: context.width * 0.3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('사료'),
-                  Text(infoData.userList[selectedIndex]['petfood']),
+                  Text(infoData.userList[selectedIndex]['petfood'] + '가격'),
+                ],
+              ),
+            ),
+            Container(
+              width: context.width * 0.3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('이전 사료'),
+                  Text('리스트 형식으로'),
+                ],
+              ),
+            ),
+            Container(
+              width: context.width * 0.3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('결제 정보'),
+                  Text(infoData.userList[selectedIndex]['credit']),
                 ],
               ),
             ),

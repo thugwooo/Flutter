@@ -1,5 +1,7 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:louishomewebtest/data/controller.dart';
 import 'package:louishomewebtest/data/petfood.dart';
 import 'package:louishomewebtest/data/style.dart';
@@ -11,15 +13,16 @@ class subscriptionScreen extends StatefulWidget {
 
 class _subscriptionScreenState extends State<subscriptionScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool showFlag = false;
+
   userDataController userData = Get.put(userDataController());
   infoController infoData = Get.put(infoController());
   var petfoodData;
-
+  var credit = ['일괄결제', '분할결제', '카드', '계좌이체', '현금'];
   @override
   void initState() {
     super.initState();
     petfoodData = petfoodName;
+    print(petfoodData);
   }
 
   @override
@@ -49,12 +52,17 @@ class _subscriptionScreenState extends State<subscriptionScreen> {
               SizedBox(height: 20),
               inputAddress(),
               SizedBox(height: 20),
-              selectPetfood(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  selectPetfood(),
+                  selectCredit(),
+                ],
+              ),
               SizedBox(height: 20),
               subscribeButton(),
             ],
           ),
-          if (showFlag) petfoodDialog(),
         ],
       ),
     );
@@ -147,19 +155,12 @@ class _subscriptionScreenState extends State<subscriptionScreen> {
         Container(
           height: 30,
           width: Get.width * 0.2,
-          child: TextFormField(
-            onSaved: (value) =>
-                userData.periodWeek.value = int.parse(value.toString()),
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: colors[0],
-                  width: 1,
-                ),
-              ),
-              border: OutlineInputBorder(),
-            ),
+          child: DropdownSearch<dynamic>(
+            mode: Mode.MENU,
+            items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            onChanged: (value) {
+              userData.periodWeek.value = value;
+            },
           ),
         ),
       ],
@@ -193,76 +194,32 @@ class _subscriptionScreenState extends State<subscriptionScreen> {
   }
 
   Widget selectPetfood() {
-    return Row(
-      children: [
-        InkWell(
-          child: InkWell(
-            onTap: () {
-              setState(() {
-                showFlag = true;
-              });
-            },
-            child: Container(
-              height: 40,
-              width: 100,
-              decoration: line,
-              child: Center(
-                child: Text(
-                  '사료 선택',
-                  style: infosmallStyle,
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 100,
-        ),
-        Text(
-          userData.petfood.value,
-          style: infosmallStyle,
-        ),
-      ],
+    return Container(
+      height: 60,
+      width: 200,
+      child: DropdownSearch<dynamic>(
+        items: petfoodName,
+        showSearchBox: true,
+        showClearButton: true,
+        selectedItem: '사료 선택',
+        onChanged: (value) {
+          userData.petfood.value = value.toString();
+        },
+      ),
     );
   }
 
-  Widget petfoodDialog() {
+  Widget selectCredit() {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(
-          width: 2,
-          color: colors[0],
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      height: context.height * 0.8,
-      width: context.width * 0.5,
-      child: GridView.builder(
-        itemCount: petfoodData.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 8,
-          childAspectRatio: 3.5 / 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-        ),
-        itemBuilder: (context, index) => InkWell(
-          onTap: () {
-            userData.petfood.value = petfoodData[index];
-            setState(() {
-              showFlag = false;
-            });
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 2, color: colors[0]),
-            ),
-            child: Text(petfoodData[index],
-                style: TextStyle(
-                  fontSize: 10,
-                )),
-          ),
-        ),
+      height: 60,
+      width: 200,
+      child: DropdownSearch<dynamic>(
+        mode: Mode.MENU,
+        items: credit,
+        selectedItem: '결제 방법',
+        onChanged: (value) {
+          userData.credit.value = value;
+        },
       ),
     );
   }
@@ -283,6 +240,8 @@ class _subscriptionScreenState extends State<subscriptionScreen> {
             'address': userData.address.value,
             'petfood': userData.petfood.value,
             'date': userData.periodWeek.value * 7,
+            'credit': userData.credit.value,
+            'registerDate': DateFormat.yMd('ko').format(DateTime.now()),
           });
           print(infoData.userList);
         },
