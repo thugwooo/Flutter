@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 import 'package:subscribeweb/data/style.dart';
+import 'package:subscribeweb/data/userListData.dart';
 import 'package:subscribeweb/screens/info_screen.dart';
 import 'package:subscribeweb/screens/subscription_screen.dart';
 
@@ -11,6 +15,17 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   var indexedButton = 0;
+
+  var baseUrl = 'http://18.188.38.27:8000/userdata/list/';
+  Future<dynamic> getUserList() async {
+    var url2 = Uri.parse(baseUrl);
+
+    Response response = await get(
+      url2,
+    );
+    data = jsonDecode(utf8.decode(response.bodyBytes));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +76,11 @@ class _MainScreenState extends State<MainScreen> {
         InkWell(
           onTap: () {
             setState(() {
-              indexedButton = 1;
+              getUserList().then((value) {
+                setState(() {
+                  indexedButton = 1;
+                });
+              });
             });
           },
           child: Container(
