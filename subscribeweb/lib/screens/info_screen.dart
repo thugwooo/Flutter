@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 import 'package:subscribeweb/data/style.dart';
 import 'package:subscribeweb/data/userListData.dart';
@@ -11,10 +12,23 @@ class infoScreen extends StatefulWidget {
 class _infoScreenState extends State<infoScreen> {
   bool dialogFlag = false;
   int selectedUserID = 0;
+  var baseUrl = 'http://18.188.38.27:8000/userdata/delete/';
   @override
   void initState() {
     super.initState();
-    print(data);
+    print(data.length);
+  }
+
+  Future<dynamic> delUserData() async {
+    var url2 = Uri.parse(baseUrl);
+
+    Response response = await post(
+      url2,
+      body: {
+        'userPhonenumber': data[selectedUserID]['userPhonenumber'],
+      },
+    );
+    print(response.statusCode);
   }
 
   @override
@@ -89,21 +103,21 @@ class _infoScreenState extends State<infoScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(data[selectedUserID]['userName']),
-                      Text('반려동물 이름'),
+                      Text(data[index]['userName']),
+                      Text(data[index]['petName']),
                     ],
                   ),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.16,
-                  child: Center(child: Text('사료 이름')),
+                  child: Center(child: Text(data[index]['petfood'])),
                 ),
                 Stack(
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width * 0.16,
                       child: Center(
-                        child: Text('날짜'),
+                        child: Text(data[index]['leftDate'].toString()),
                       ),
                     ),
                     Positioned(
@@ -115,7 +129,16 @@ class _infoScreenState extends State<infoScreen> {
                           color: Colors.red,
                           size: 20,
                         ),
-                        onTap: () {},
+                        onTap: () {
+                          setState(() {
+                            selectedUserID = index;
+                            delUserData().then((value) {
+                              setState(() {
+                                data = value;
+                              });
+                            });
+                          });
+                        },
                       ),
                     ),
                   ],
@@ -146,10 +169,142 @@ class _infoScreenState extends State<infoScreen> {
           width: MediaQuery.of(context).size.width * 0.4,
           child: Column(
             children: [
-              //Text('이름'),
-              Text(
-                data[selectedUserID]['userName'],
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('이름')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['userName']),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('연락처')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['userPhonenumber']),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('주소')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['address']),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('반려동물 이름')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['petName']),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('사료 이름')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['petfood']),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('구독 신청 날짜')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['registerDate']),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('구독 주기(주)')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child:
+                          Text(data[selectedUserID]['periodWeek'].toString()),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('다음 배송 날짜')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['deliveryDate']),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(child: Text('배송 남은 날')),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Center(
+                      child: Text(data[selectedUserID]['leftDate'].toString()),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

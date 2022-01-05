@@ -23,7 +23,15 @@ class _MainScreenState extends State<MainScreen> {
     Response response = await get(
       url2,
     );
-    data = jsonDecode(utf8.decode(response.bodyBytes));
+    return jsonDecode(utf8.decode(response.bodyBytes));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserList().then((value) {
+      data = value;
+    });
   }
 
   @override
@@ -78,7 +86,9 @@ class _MainScreenState extends State<MainScreen> {
             setState(() {
               getUserList().then((value) {
                 setState(() {
+                  data = value;
                   indexedButton = 1;
+                  print(data.length);
                 });
               });
             });
