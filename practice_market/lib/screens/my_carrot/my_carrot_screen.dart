@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:practice_market/models/icon_menu.dart';
 
+import 'components/card_icon_menu.dart';
 import 'components/my_carrot_header.dart';
 
 class MyCarrotScreen extends StatelessWidget {
@@ -32,11 +34,11 @@ class MyCarrotScreen extends StatelessWidget {
           children: [
             MyCarrotHeader(),
             SizedBox(height: 8),
-            //CardIconMenu(iconMenuList: iconMenu1),
+            CardIconMenu(iconMenuList: iconMenu1),
             SizedBox(height: 8),
-            //CardIconMenu(iconMenuList: iconMenu2),
+            CardIconMenu(iconMenuList: iconMenu2),
             SizedBox(height: 8),
-            //CardIconMenu(iconMenuList: iconMenu3),
+            CardIconMenu(iconMenuList: iconMenu3),
           ],
         ),
       ),
