@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:netflix_practic/screens/components/label_icon.dart';
 import 'package:netflix_practic/screens/components/play_button.dart';
 import 'package:netflix_practic/screens/components/small_sub_text.dart';
+import 'package:netflix_practic/screens/detail/detail_screen.dart';
 import 'package:netflix_practic/screens/home/components/rank_poster.dart';
 
 import 'components/poster.dart';
@@ -328,7 +329,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Divider(),
                     GestureDetector(
                       behavior: HitTestBehavior.translucent,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, DetailScreen.routeName);
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
